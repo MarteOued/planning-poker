@@ -1,4 +1,4 @@
-                  Planning Poker - Application Web
+                                                                     Planning Poker - Application Web
 
 Application collaborative de Planning Poker permettant l'estimation de fonctionnalités en équipe selon les méthodes agiles.
 
@@ -147,30 +147,6 @@ Générer la documentation
 cd server
 npm run docs
 La documentation sera disponible dans server/docs/index.html
-
-Structure du projet
-
-planning-poker/
-├── server/              # Backend Node.js
-│   ├── src/
-│   │   ├── models/      # Classes métier
-│   │   ├── managers/    # Gestionnaires
-│   │   ├── utils/       # Utilitaires
-│   │   ├── socket/      # Handlers WebSocket
-│   │   └── routes/      # Routes HTTP
-│   └── __tests__/       # Tests Jest
-│
-├── client/              # Frontend React
-│   ├── src/
-│   │   ├── components/  # Composants réutilisables
-│   │   ├── pages/       # Pages principales
-│   │   ├── services/    # Services (Socket)
-│   │   └── utils/       # Constantes
-│   └── public/
-│       └── cartes/      # Images des cartes
-│
-└── .github/
-    └── workflows/       # GitHub Actions CI/CD
 
 Intégration Continue
 
