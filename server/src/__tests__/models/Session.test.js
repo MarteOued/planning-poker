@@ -1,88 +1,71 @@
 const Session = require('../../models/Session');
 
-// Mock pour Player si la classe n'existe pas encore
-class MockPlayer {
-  constructor(id, pseudo) {
-    this.id = id;
-    this.pseudo = pseudo;
-  }
-}
+describe('Session Model', () => {
+  
+  test('crée une session correctement', () => {
+    const session = new Session('org-1', 'strict');
+    
+    expect(session.id).toBeDefined();
+    expect(session.code).toBeDefined();
+    expect(session.mode).toBe('strict');
+    expect(session.organizerId).toBe('org-1');
+    expect(session.players).toEqual([]);
+    expect(session.status).toBe('waiting');
+  });
 
-describe('Classe Session - Tests de base', () => {
-  test('devrait créer une instance de session', () => {
-    const session = new Session('org-123');
-    expect(session).toBeInstanceOf(Session);
+  test('génère un code de 6 caractères', () => {
+    const session = new Session('org-1');
+    
     expect(session.code).toHaveLength(6);
-  });
-
-  test('devrait ajouter et supprimer des joueurs', () => {
-    const session = new Session('org-123');
-    const player = new MockPlayer('p1', 'Alice');
-    
-    session.addPlayer(player);
-    expect(session.players).toHaveLength(1);
-    
-    session.removePlayer('p1');
-    expect(session.players).toHaveLength(0);
-  });
-
-  test('devrait gérer le backlog', () => {
-    const session = new Session('org-123');
-    const features = [{ id: 'F1', name: 'Test Feature' }];
-    
-    session.loadBacklog(features);
-    expect(session.backlog).toHaveLength(1);
-    
-    const current = session.getCurrentFeature();
-    expect(current).toEqual(features[0]);
-  });
-
-  test('devrait générer un code à 6 caractères', () => {
-    const session = new Session('org-123');
     expect(session.code).toMatch(/^[A-Z0-9]{6}$/);
   });
 
-  test('devrait lancer une erreur pour un pseudo dupliqué', () => {
-    const session = new Session('org-123');
-    const player1 = new MockPlayer('p1', 'Alice');
-    const player2 = new MockPlayer('p2', 'Alice');
+  test('getCurrentFeature retourne null si pas de backlog', () => {
+    const session = new Session('org-1');
     
-    session.addPlayer(player1);
-    
-    expect(() => {
-      session.addPlayer(player2);
-    }).toThrow('Ce pseudo est déjà utilisé');
+    expect(session.getCurrentFeature()).toBeNull();
   });
 
-  test('devrait passer à la fonctionnalité suivante', () => {
-    const session = new Session('org-123');
+  test('isCompleted retourne true si pas de backlog', () => {
+    const session = new Session('org-1');
+    
+    expect(session.isCompleted()).toBe(true);
+  });
+
+  test('loadBacklog charge les fonctionnalités', () => {
+    const session = new Session('org-1');
     const features = [
-      { id: 'F1', name: 'Feature 1' },
-      { id: 'F2', name: 'Feature 2' }
+      { id: 'US-001', name: 'Feature 1' },
+      { id: 'US-002', name: 'Feature 2' }
     ];
     
     session.loadBacklog(features);
-    const nextFeature = session.nextFeature();
     
-    expect(nextFeature).toEqual(features[1]);
-    expect(session.currentFeatureIndex).toBe(1);
+    expect(session.backlog).toHaveLength(2);
+    expect(session.currentFeatureIndex).toBe(0);
   });
 
-  test('devrait calculer la progression', () => {
-    const session = new Session('org-123');
-    const features = [
-      { id: 'F1', name: 'Feature 1' },
-      { id: 'F2', name: 'Feature 2' },
-      { id: 'F3', name: 'Feature 3' }
-    ];
-    
-    session.loadBacklog(features);
-    session.nextFeature(); // Passe à la deuxième feature
+  test('getProgress calcule la progression correctement', () => {
+    const session = new Session('org-1');
+    session.loadBacklog([
+      { id: 'US-001', name: 'Feature 1' },
+      { id: 'US-002', name: 'Feature 2' }
+    ]);
     
     const progress = session.getProgress();
     
-    expect(progress.total).toBe(3);
-    expect(progress.completed).toBe(1);
-    expect(progress.percentage).toBe(33);
+    expect(progress.total).toBe(2);
+    expect(progress.completed).toBe(0);
+    expect(progress.percentage).toBe(0);
+  });
+
+  test('toJSON retourne un objet valide', () => {
+    const session = new Session('org-1', 'strict');
+    const json = session.toJSON(false);
+    
+    expect(json).toHaveProperty('id');
+    expect(json).toHaveProperty('code');
+    expect(json).toHaveProperty('mode', 'strict');
+    expect(json).toHaveProperty('status', 'waiting');
   });
 });

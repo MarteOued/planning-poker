@@ -42,3 +42,6 @@ io.on('connection', (socket) => {
 server.listen(PORT, () => {
   console.log(` Serveur lancé sur http://localhost:${PORT}`);
 });
+
+// Point d'entrée du serveur
+console.log('Server minimal pour tests');
