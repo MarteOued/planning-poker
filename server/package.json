@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "docs:serve": "npx http-server docs -p 8080"
   },
   "keywords": [
     "planning-poker",
