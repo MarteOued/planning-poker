@@ -1,0 +1,40 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(node_modules|__tests__|coverage)"
+  },
+  "opts": {
+    "destination": "./docs",
+    "recurse": true,
+    "readme": "./README.md",
+    "template": "node_modules/docdash"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": false
+    }
+  },
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true,
+    "collapse": true,
+    "wrap": true,
+    "typedefs": true,
+    "removeQuotes": "none",
+    "scripts": [],
+    "menu": {
+      "Documentation": {
+        "href": "https://github.com/MarteOued/planning-poker",
+        "target": "_blank"
+      }
+    }
+  }
+}
