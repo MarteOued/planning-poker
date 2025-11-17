@@ -1,13 +1,9 @@
-                  Planning Poker - Application Web
-
-Application collaborative de Planning Poker permettant l'estimation de fonctionnalités en équipe selon les méthodes agiles.
+Planning Poker - Application collaborative de Planning Poker permettant l'estimation de fonctionnalités en équipe selon les méthodes agiles.
 
 Description
-
 Planning Poker est une application web temps réel permettant à plusieurs joueurs d'estimer la complexité de fonctionnalités d'un backlog de manière collaborative. L'application supporte deux modes de jeu et propose une interface intuitive avec des cartes de planning poker authentiques.
 
 Fonctionnalités principales
-
 Création et jonction de sessions distantes via code unique
 Communication temps réel entre les joueurs (WebSocket)
 Deux modes de validation des estimations : Strict (unanimité) et Moyenne
@@ -17,15 +13,14 @@ Historique complet des votes et statistiques
 Tests automatisés et documentation complète
 
 Technologies utilisées
-Backend
 
+Backend
 Node.js avec Express 
 Socket.io pour la communication temps réel
 Jest pour les tests unitaires et d'intégration
 JSDoc pour la génération automatique de documentation
 
 Frontend
-
 React 18 pour l'interface utilisateur
 React Router pour la navigation
 Socket.io-client pour la communication avec le serveur
@@ -33,8 +28,8 @@ Tailwind CSS pour le style moderne et responsive
 CSS pour le design responsive
 
 Installation
-Prérequis
 
+Prérequis
 Node.js version 18 ou supérieure
 npm version 9 ou supérieure
 Git
@@ -147,30 +142,6 @@ Générer la documentation
 cd server
 npm run docs
 La documentation sera disponible dans server/docs/index.html
-
-Structure du projet
-
-planning-poker/
-├── server/              # Backend Node.js
-│   ├── src/
-│   │   ├── models/      # Classes métier
-│   │   ├── managers/    # Gestionnaires
-│   │   ├── utils/       # Utilitaires
-│   │   ├── socket/      # Handlers WebSocket
-│   │   └── routes/      # Routes HTTP
-│   └── __tests__/       # Tests Jest
-│
-├── client/              # Frontend React
-│   ├── src/
-│   │   ├── components/  # Composants réutilisables
-│   │   ├── pages/       # Pages principales
-│   │   ├── services/    # Services (Socket)
-│   │   └── utils/       # Constantes
-│   └── public/
-│       └── cartes/      # Images des cartes
-│
-└── .github/
-    └── workflows/       # GitHub Actions CI/CD
 
 Intégration Continue
 
