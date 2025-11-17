@@ -27,20 +27,27 @@ jobs:
 
     - name: Installation des dépendances
       working-directory: ./server
-      run: npm install
+      run: npm ci  # Utilise npm ci pour une installation plus fiable
+    
+    - name: Correction des permissions Jest
+      working-directory: ./server
+      run: |
+        npx -c "jest --version" || echo "Jest vérification"
+        chmod +x node_modules/.bin/jest || true
+        chmod +x node_modules/.bin/jest-cli || true
     
     - name: Exécution des tests
       working-directory: ./server
-      run: npm test
+      run: npx jest  # Utilise npx directement
     
     - name: Génération de la documentation JSDoc
       working-directory: ./server
-      run: npm run docs
+      run: npx jsdoc -c jsdoc.json || npm run docs
     
     - name: Upload de la documentation
       uses: actions/upload-artifact@v4
       with:
-        name: backend-docs
+        name: backend-docs-${{ matrix.node-version }}
         path: server/docs/
         retention-days: 30
 
@@ -62,11 +69,11 @@ jobs:
     
     - name: Installation des dépendances
       working-directory: ./server
-      run: npm install
+      run: npm ci
     
     - name: Génération de la documentation
       working-directory: ./server
-      run: npm run docs
+      run: npx jsdoc -c jsdoc.json || npm run docs
     
     - name: Déploiement sur GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
