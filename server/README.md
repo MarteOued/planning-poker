@@ -54,7 +54,10 @@ npm run docs:serve
 
 Accessible par défaut à : http://localhost:8080
 
+---
 Architecture du projet
+
+```
 server/
 ├── src/
 │   ├── models/            # Classes métier (Session, Feature, Vote, Player)
@@ -71,8 +74,11 @@ server/
 │   ├── sessions/          # Sessions sauvegardées
 │   └── exports/           # Export des résultats
 └── server.js              # Point d'entrée de l'application
+```
 
-🛠 Stack technique
+---
+
+Stack technique
 
 Node.js – environnement d’exécution JavaScript
 
