@@ -1,0 +1,94 @@
+name: CI-CD 
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Tests et Documentation Backend
+  backend-tests:
+    name: Backend - Tests et Documentation
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Installation des dépendances
+      working-directory: ./server
+      run: npm install
+    
+    - name: Exécution des tests
+      working-directory: ./server
+      run: npm test
+    
+    - name: Génération de la documentation JSDoc
+      working-directory: ./server
+      run: npm run docs
+    
+    - name: Upload de la documentation
+      uses: actions/upload-artifact@v3
+      with:
+        name: backend-docs
+        path: server/docs/
+        retention-days: 30
+
+  # Déploiement documentation (GitHub Pages)
+  deploy-docs:
+    name: Déploiement de la documentation
+    runs-on: ubuntu-latest
+    needs: [backend-tests]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+    
+    - name: Installation des dépendances
+      working-directory: ./server
+      run: npm install
+    
+    - name: Génération de la documentation
+      working-directory: ./server
+      run: npm run docs
+    
+    - name: Déploiement sur GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./server/docs
+        publish_branch: gh-pages
+        force_orphan: true
+
+  # Notification de succès
+  notification:
+    name: Notification
+    runs-on: ubuntu-latest
+    needs: [backend-tests]
+    if: always()
+    
+    steps:
+    - name: Statut du pipeline
+      run: |
+        if [ "${{ needs.backend-tests.result }}" == "success" ]; then
+          echo "Pipeline CI/CD réussie !"
+        else
+          echo "Pipeline CI/CD échouée !"
+          exit 1
+        fi
