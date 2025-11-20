@@ -66,6 +66,7 @@ jobs:
         name: backend-docs
         path: server/docs/
         retention-days: 30
+        overwrite: true
 
   # Job 2 : Tests Frontend
   # frontend-tests:
