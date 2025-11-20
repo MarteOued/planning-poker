@@ -1,4 +1,4 @@
-name: CI-CD 
+name: CI-CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  # Tests et Documentation Backend
+  # Job 1 : Tests et Documentation Backend
   backend-tests:
     name: Backend - Tests et Documentation
     runs-on: ubuntu-latest
@@ -24,36 +24,125 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Installation des dépendances
-      working-directory: ./server
-      run: npm ci  # Utilise npm ci pour une installation plus fiable
+        cache: 'npm'
+        cache-dependency-path: server/package-lock.json
     
-    - name: Correction des permissions Jest
+    - name: Installation des dependances
       working-directory: ./server
-      run: |
-        npx -c "jest --version" || echo "Jest vérification"
-        chmod +x node_modules/.bin/jest || true
-        chmod +x node_modules/.bin/jest-cli || true
+      run: npm ci
     
-    - name: Exécution des tests
+    - name: Linter (ESLint)
       working-directory: ./server
-      run: npx jest  # Utilise npx directement
+      run: npm run lint --if-present
+      continue-on-error: true
     
-    - name: Génération de la documentation JSDoc
+    - name: Execution des tests
       working-directory: ./server
-      run: npx jsdoc -c jsdoc.json || npm run docs
+      run: npm test
+    
+    - name: Generation du coverage
+      working-directory: ./server
+      run: npm run test:coverage
+    
+    - name: Upload du rapport de coverage
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./server/coverage/coverage-final.json
+        flags: backend
+        name: backend-coverage
+    
+    - name: Generation de la documentation JSDoc
+      working-directory: ./server
+      run: npm run docs
     
     - name: Upload de la documentation
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
-        name: backend-docs-${{ matrix.node-version }}
+        name: backend-docs
         path: server/docs/
         retention-days: 30
 
-  # Déploiement documentation (GitHub Pages)
+  # Job 2 : Tests Frontend
+  # frontend-tests:
+  #   name: Frontend - Tests
+  #   runs-on: ubuntu-latest
+  #   
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x, 20.x]
+  #   
+  #   steps:
+  #   - name: Checkout du code
+  #     uses: actions/checkout@v3
+  #   
+  #   - name: Setup Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
+  #       cache: 'npm'
+  #       cache-dependency-path: client/package-lock.json
+  #   
+  #   - name: Installation des dependances
+  #     working-directory: ./client
+  #     run: npm ci
+  #   
+  #   - name: Linter (ESLint)
+  #     working-directory: ./client
+  #     run: npm run lint --if-present
+  #     continue-on-error: true
+  #   
+  #   - name: Execution des tests
+  #     working-directory: ./client
+  #     run: npm test -- --watchAll=false
+  #     env:
+  #       CI: true
+  #   
+  #   - name: Build de production
+  #     working-directory: ./client
+  #     run: npm run build
+
+  # Job 3 : Qualité du code
+  code-quality:
+    name: Analyse de la qualite du code
+    runs-on: ubuntu-latest
+    needs: [backend-tests]  # on enlève frontend-tests pour le moment
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+    
+    - name: Installation Backend
+      working-directory: ./server
+      run: npm ci
+    
+    - name: Coverage Backend
+      working-directory: ./server
+      run: npm run test:coverage
+    
+    - name: Affichage du resume coverage
+      working-directory: ./server
+      run: |
+        echo "=== Coverage Backend ==="
+        cat coverage/coverage-summary.json || echo "Pas de rapport de coverage"
+    
+    - name: Verification seuil de coverage
+      working-directory: ./server
+      run: |
+        COVERAGE=$(node -e "const c=require('./coverage/coverage-summary.json'); console.log(c.total.lines.pct)")
+        echo "Coverage: $COVERAGE%"
+        if (( $(echo "$COVERAGE < 70" | bc -l) )); then
+          echo "Coverage trop bas! Minimum: 70%"
+          exit 1
+        fi
+
+  # Job 4 : Deploiement documentation (GitHub Pages)
   deploy-docs:
-    name: Déploiement de la documentation
+    name: Deploiement de la documentation
     runs-on: ubuntu-latest
     needs: [backend-tests]
     if: github.ref == 'refs/heads/main'
@@ -67,15 +156,15 @@ jobs:
       with:
         node-version: '20.x'
     
-    - name: Installation des dépendances
+    - name: Installation des dependances
       working-directory: ./server
       run: npm ci
     
-    - name: Génération de la documentation
+    - name: Generation de la documentation
       working-directory: ./server
-      run: npx jsdoc -c jsdoc.json || npm run docs
+      run: npm run docs
     
-    - name: Déploiement sur GitHub Pages
+    - name: Deploiement sur GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -83,19 +172,20 @@ jobs:
         publish_branch: gh-pages
         force_orphan: true
 
-  # Notification de succès
+  # Job 5 : Notification de succes
   notification:
     name: Notification
     runs-on: ubuntu-latest
-    needs: [backend-tests]
+    needs: [backend-tests, code-quality]  # frontend-tests est commenté
     if: always()
     
     steps:
-    - name: Statut du pipeline
+    - name: Status du pipeline
       run: |
-        if [ "${{ needs.backend-tests.result }}" == "success" ]; then
-          echo "Pipeline CI/CD réussie !"
+        if [ "${{ needs.backend-tests.result }}" == "success" ] && \
+           [ "${{ needs.code-quality.result }}" == "success" ]; then
+          echo " Pipeline CI/CD reussie!"
         else
-          echo "Pipeline CI/CD échouée !"
+          echo " Pipeline CI/CD echouee!"
           exit 1
         fi

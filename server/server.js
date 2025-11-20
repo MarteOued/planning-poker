@@ -8,6 +8,13 @@ const cors = require('cors');
 const app = express();
 const server = http.createServer(app);
 
+const handleSessionEvents = require('./src/socket/sessionHandler');
+const handleVoteEvents = require('./src/socket/voteHandler');
+const handleGameEvents = require('./src/socket/gameHandler');
+
+const sessionRoutes = require('./src/routes/sessionRoutes');
+const fileRoutes = require('./src/routes/fileRoutes');
+
 // Configuration de Socket.io avec CORS
 const io = socketIo(server, {
   cors: {
@@ -32,6 +39,10 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log(' Nouveau joueur connecté:', socket.id);
   
+  handleSessionEvents(io, socket);
+  handleVoteEvents(io, socket);
+  handleGameEvents(io, socket);
+ 
   // Quand un joueur se déconnecte
   socket.on('disconnect', () => {
     console.log(' Joueur déconnecté:', socket.id);
@@ -44,4 +55,4 @@ server.listen(PORT, () => {
 });
 
 // Point d'entrée du serveur
-console.log('Server minimal pour tests');
+// console.log('Server minimal pour tests');
