@@ -5,7 +5,7 @@
 /**
  * Valeurs de cartes autorisées
  */
-const VALID_CARD_VALUES = [1, 2, 3, 5, 8, 13, 21, '?', 'coffee'];
+const VALID_CARD_VALUES = [1, 2, 3, 5, 8, 13, 20, 40, 100, '?', 'coffee'];
 
 /**
  * Modes de jeu autorisés

@@ -95,14 +95,14 @@ export default function GameRoom() {
     })
 
     socket.on('session-finished', (data) => {
-      showToast('🏁 Toutes les features ont été estimées !', 'success')
+      showToast(' Toutes les features ont été estimées !', 'success')
       setTimeout(() => {
         navigate('/')
       }, 3000)
     })
 
     socket.on('error', (data) => {
-      showToast(`❌ ${data.message}`, 'error')
+      showToast(` ${data.message}`, 'error')
     })
 
     if (features && features.length > 0) {
@@ -384,7 +384,7 @@ export default function GameRoom() {
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
                     <h3 className="text-xl font-bold text-gray-800 mb-4">
-                      {hasVoted ? '✅ Vote enregistré' : '🃏 Sélectionnez votre carte'}
+                      {hasVoted ? '✅ Vote enregistré' : ' Sélectionnez votre carte'}
                     </h3>
                     
                     {/* Cards grid */}

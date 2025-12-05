@@ -166,7 +166,7 @@ io.on('connection', (socket) => {
     
     session.status = 'playing'
     
-    console.log(`🚀 Session ${sessionId} démarrée`)
+    console.log(` Session ${sessionId} démarrée`)
     
     // Notifier tout le monde que la partie démarre
     io.to(sessionId).emit('session-started', {
@@ -200,7 +200,7 @@ io.on('connection', (socket) => {
       session.pm.vote = vote
     }
     
-    console.log(`🗳️ Vote reçu dans ${sessionId}: ${vote}`)
+    console.log(` Vote reçu dans ${sessionId}: ${vote}`)
     
     // Notifier tous les joueurs de la mise à jour des votes
     io.to(sessionId).emit('vote-updated', {
@@ -368,7 +368,7 @@ io.on('connection', (socket) => {
           estimations: session.estimations || []
         }
       })
-      console.log(`🏁 Session ${sessionId} terminée - ${session.estimations?.length || 0} features estimées`)
+      console.log(`Session ${sessionId} terminée - ${session.estimations?.length || 0} features estimées`)
     } else {
       // Feature suivante
       io.to(sessionId).emit('next-feature', {
@@ -447,7 +447,7 @@ io.on('connection', (socket) => {
   })
   
   // ========================================
-  // 🆕 TIMER EVENTS - Synchronisation
+  //  TIMER EVENTS - Synchronisation
   // ========================================
   
   // Mettre à jour le timer
@@ -494,7 +494,7 @@ io.on('connection', (socket) => {
         io.to(sessionId).emit('pm-disconnected', {
           message: 'Le PM s\'est déconnecté'
         })
-        console.log(`⚠️ PM déconnecté de la session ${sessionId}`)
+        console.log(` PM déconnecté de la session ${sessionId}`)
       }
       
       // Vérifier si c'est un joueur
@@ -518,6 +518,6 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 3001
 
 httpServer.listen(PORT, () => {
-  console.log(`🚀 Serveur Socket.io démarré sur le port ${PORT}`)
-  console.log(`📡 Frontend attendu sur http://localhost:5173`)
+  console.log(` Serveur Socket.io démarré sur le port ${PORT}`)
+  console.log(` Frontend attendu sur http://localhost:5173`)
 })

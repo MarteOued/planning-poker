@@ -65,7 +65,7 @@ npm install
 npm run dev
 ```
 
-Le serveur démarre sur http://localhost:5000
+Le serveur démarre sur http://localhost:3001
 
 **3. Installer et démarrer le frontend (dans un nouveau terminal)**
 
@@ -75,7 +75,7 @@ npm install
 npm start
 ```
 
-L'application s'ouvre automatiquement sur http://localhost:3000
+L'application s'ouvre automatiquement sur http://localhost:5173
 
 ---
 
@@ -85,7 +85,7 @@ L'application s'ouvre automatiquement sur http://localhost:3000
 
 1. Accéder à l'application
 2. Entrer votre pseudo
-3. Sélectionner le mode de jeu souhaité
+3. Sélectionner le mode de jeu souhaité et le nombre de joueur
 4. Cliquer sur "Créer une session"
 5. Partager le code de session généré avec les autres participants
 
@@ -194,6 +194,8 @@ npm test
 ```bash
 cd server
 npm run docs
+npm run docs:serve
+
 ```
 
 La documentation sera disponible dans `server/docs/index.html`
@@ -226,8 +228,7 @@ planning-poker/
 │   │   ├── models/         # Classes métier
 │   │   ├── managers/       # Logique métier
 │   │   ├── socket/         # Gestionnaires WebSocket
-│   │   ├── routes/         # Routes API REST
-│   │   └── utils/          # Fonctions utilitaires
+│   │   
 │   ├── tests/              # Tests Jest
 │   ├── docs/               # Documentation générée
 │   └── package.json
@@ -236,7 +237,7 @@ planning-poker/
 │   ├── src/
 │   │   ├── components/     # Composants réutilisables
 │   │   ├── pages/          # Pages de l'application
-│   │   ├── services/       # Services (Socket, API)
+│   │   ├── stores/       # Services (Socket, API)
 │   │   └── utils/          # Constantes et helpers
 │   ├── public/
 │   └── package.json
@@ -254,10 +255,10 @@ planning-poker/
 
 ### Le serveur ne démarre pas
 
-Vérifier que le port 5000 n'est pas déjà utilisé. Pour changer le port :
+Vérifier que le port 3001 n'est pas déjà utilisé. Pour changer le port :
 
 ```bash
-export PORT=3001
+export PORT=3002
 npm run dev
 ```
 
