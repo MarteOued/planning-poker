@@ -33,16 +33,20 @@ app.post('/api/sessions/create', (req, res) => {
     id: sessionId,
     pm: {
       name: userName,
-      socketId: null
+      socketId: null,
+      voted: false,
+      vote: null
     },
     mode,
     playerCount,
     features,
     players: [],
     currentFeatureIndex: 0,
+    currentRound: 1,
     votes: {},
     status: 'waiting', // waiting, playing, finished
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    estimations: []
   })
   
   console.log(`✅ Session créée: ${sessionId} par ${userName}`)
@@ -90,6 +94,7 @@ io.on('connection', (socket) => {
     if (isPM) {
       // Le PM se connecte
       session.pm.socketId = socket.id
+      session.pm.name = userName
       console.log(`👨‍💼 PM ${userName} a rejoint la session ${sessionId}`)
     } else {
       // Vérifier si le joueur existe déjà (éviter les doublons)
@@ -265,13 +270,13 @@ io.on('connection', (socket) => {
           estimation = votes[0]
           message = 'Unanimité atteinte !'
           // Enregistrer l'estimation
-          if (!session.estimations) session.estimations = []
           session.estimations.push({
             featureId: session.features[session.currentFeatureIndex].id,
             featureName: session.features[session.currentFeatureIndex].name,
             estimation,
             rounds: session.currentRound,
-            votes: session.votes
+            votes: session.votes,
+            isUnanimous: true
           })
         } else {
           needsNewRound = true
@@ -285,13 +290,13 @@ io.on('connection', (socket) => {
             estimation = votes[0]
             message = 'Unanimité au premier tour !'
             // Enregistrer l'estimation
-            if (!session.estimations) session.estimations = []
             session.estimations.push({
               featureId: session.features[session.currentFeatureIndex].id,
               featureName: session.features[session.currentFeatureIndex].name,
               estimation,
               rounds: session.currentRound,
-              votes: session.votes
+              votes: session.votes,
+              isUnanimous: true
             })
           } else {
             needsNewRound = true
@@ -304,13 +309,13 @@ io.on('connection', (socket) => {
           estimation = Math.round(average)
           message = 'Estimation calculée par moyenne.'
           // Enregistrer l'estimation
-          if (!session.estimations) session.estimations = []
           session.estimations.push({
             featureId: session.features[session.currentFeatureIndex].id,
             featureName: session.features[session.currentFeatureIndex].name,
             estimation,
             rounds: session.currentRound,
-            votes: session.votes
+            votes: session.votes,
+            isUnanimous: false
           })
         }
       }
@@ -327,7 +332,9 @@ io.on('connection', (socket) => {
           message,
           mode: session.mode,
           round: session.currentRound,
-          isUnanimous
+          isUnanimous,
+          isSessionFinished: false,
+          estimations: session.estimations
         }
       })
     }
@@ -358,24 +365,37 @@ io.on('connection', (socket) => {
     session.currentFeatureIndex++
     
     if (session.currentFeatureIndex >= session.features.length) {
-      // Fin de la session
+      // Fin de la session - LE PM DOIT CONFIRMER
       session.status = 'finished'
-      io.to(sessionId).emit('session-finished', {
-        message: 'Toutes les features ont été estimées !',
-        estimations: session.estimations || [],
+      
+      console.log(`🏁 Session ${sessionId} terminée - ${session.estimations.length} features estimées`)
+      
+      // Envoyer les résultats finaux avec flag de fin
+      io.to(sessionId).emit('all-voted', {
+        votes: session.votes,
+        players: session.players,
+        pm: session.pm,
         result: {
-          isSessionFinished: true,
-          estimations: session.estimations || []
+          votes: [],
+          estimation: null,
+          needsNewRound: false,
+          message: '🎉 Toutes les features ont été estimées !',
+          mode: session.mode,
+          round: session.currentRound,
+          isUnanimous: false,
+          isSessionFinished: true,  // FLAG IMPORTANT
+          estimations: session.estimations
         }
       })
-      console.log(`Session ${sessionId} terminée - ${session.estimations?.length || 0} features estimées`)
+      
+      console.log(`⏳ En attente que le PM télécharge les résultats de ${sessionId}...`)
     } else {
       // Feature suivante
       io.to(sessionId).emit('next-feature', {
         currentFeatureIndex: session.currentFeatureIndex,
         currentFeature: session.features[session.currentFeatureIndex]
       })
-      console.log(`➡️ Session ${sessionId} - Feature ${session.currentFeatureIndex + 1}`)
+      console.log(`➡️ Session ${sessionId} - Feature ${session.currentFeatureIndex + 1}/${session.features.length}`)
     }
   })
   
@@ -444,6 +464,43 @@ io.on('connection', (socket) => {
     })
     
     console.log(`▶️ Session ${sessionId} reprise après pause café`)
+  })
+  
+  // Terminer la session manuellement
+  socket.on('end-session-manually', ({ sessionId }) => {
+    const session = sessions.get(sessionId)
+    
+    if (!session) {
+      socket.emit('error', { message: 'Session introuvable' })
+      return
+    }
+    
+    if (session.pm.socketId !== socket.id) {
+      socket.emit('error', { message: 'Seul le PM peut terminer la session' })
+      return
+    }
+    
+    session.status = 'finished'
+    
+    console.log(`🏁 Session ${sessionId} terminée manuellement par le PM`)
+    
+    // Envoyer les résultats avec flag de fin
+    io.to(sessionId).emit('all-voted', {
+      votes: session.votes,
+      players: session.players,
+      pm: session.pm,
+      result: {
+        votes: [],
+        estimation: null,
+        needsNewRound: false,
+        message: 'Session terminée manuellement par le PM',
+        mode: session.mode,
+        round: session.currentRound,
+        isUnanimous: false,
+        isSessionFinished: true,
+        estimations: session.estimations
+      }
+    })
   })
   
   // ========================================

@@ -68,14 +68,14 @@ export default function WaitingRoom() {
 
     socket.on('session-started', (data) => {
       console.log(' Session démarrée!')
-      showToast(' La session démarre !', 'success')
+      showToast('🎮 La session démarre !', 'success')
       setTimeout(() => {
         navigate(`/game/${sessionId}`)
       }, 1500)
     })
 
     socket.on('pm-disconnected', (data) => {
-      showToast('⚠️ Le PM s\'est déconnecté - Session en pause', 'error')
+      showToast(' Le PM s\'est déconnecté - Session en pause', 'error')
     })
 
     socket.on('error', (data) => {
@@ -182,7 +182,7 @@ export default function WaitingRoom() {
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Session info */}
           <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
-            <h3 className="text-xl font-bold text-gray-800 mb-4"> Informations</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-4">📋 Informations</h3>
             <div className="space-y-3">
               <div className="flex justify-between p-3 bg-blue-50 rounded-lg">
                 <span className="text-blue-600 font-medium">Code Session:</span>
@@ -210,7 +210,7 @@ export default function WaitingRoom() {
           {/* Players list */}
           <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
             <h3 className="text-xl font-bold text-gray-800 mb-4">
-              👥 Joueurs Connectés ({totalPlayers}/{maxPlayers})
+              👥 Joueurs Connectés {totalPlayers}
             </h3>
             <div className="space-y-3">
               {/* PM */}
@@ -304,18 +304,38 @@ export default function WaitingRoom() {
         {/* Share code */}
         <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100 mb-6">
           <div className="text-center">
-            <p className="text-gray-600 mb-4 font-medium"> Partagez ce code avec vos collègues:</p>
+            <p className="text-gray-600 mb-4 font-medium">🔗 Partagez ce code avec vos collègues:</p>
             <div className="flex items-center justify-center gap-4">
               <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-widest">
                 {sessionId}
               </span>
-              <Button
-                variant={copied ? "success" : "secondary"}
-                onClick={copySessionCode}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  copySessionCode()
+                }}
+                className={`
+                  px-4 py-2 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2
+                  ${copied 
+                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white' 
+                    : 'bg-white border-2 border-blue-300 text-blue-600 hover:bg-blue-50'
+                  }
+                `}
               >
-                {copied ? <Check size={20} className="inline mr-2" /> : <Copy size={20} className="inline mr-2" />}
-                {copied ? 'Copié !' : 'Copier'}
-              </Button>
+                {copied ? (
+                  <>
+                    <Check size={20} />
+                    <span>Copié !</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={20} />
+                    <span>Copier</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -327,14 +347,17 @@ export default function WaitingRoom() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-6"
           >
-            <Button
-              variant="primary"
-              size="lg"
-              fullWidth
-              onClick={handleStart}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleStart()
+              }}
+              className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
               Démarrer la Session (PM uniquement)
-            </Button>
+            </button>
           </motion.div>
         )}
       </div>

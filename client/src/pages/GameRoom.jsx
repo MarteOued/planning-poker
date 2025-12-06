@@ -14,7 +14,7 @@ const CARD_VALUES = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100, '?', '☕']
 export default function GameRoom() {
   const navigate = useNavigate()
   const { sessionId } = useParams()
-  const { userName, isPM, features, currentFeatureIndex: storeFeatureIndex, nextFeature: storeNextFeature } = useSessionStore()
+  const { userName, isPM, features, mode, currentFeatureIndex: storeFeatureIndex, nextFeature: storeNextFeature } = useSessionStore()
   
   const [selectedCard, setSelectedCard] = useState(null)
   const [hasVoted, setHasVoted] = useState(false)
@@ -53,7 +53,13 @@ export default function GameRoom() {
       setPmData(data.pm)
       setResult(data.result)
       setShowResults(true)
-      showToast('🎉 Tous les joueurs ont voté !', 'success')
+      
+      // Afficher un toast différent selon l'état
+      if (data.result?.isSessionFinished) {
+        showToast('🏁 Toutes les features ont été estimées ! Le PM peut télécharger les résultats.', 'info')
+      } else {
+        showToast('🎉 Tous les joueurs ont voté !', 'success')
+      }
     })
     
     socket.on('coffee-break', (data) => {
@@ -94,15 +100,8 @@ export default function GameRoom() {
       showToast(`➡️ Feature ${data.currentFeatureIndex + 1}: ${data.currentFeature.name || data.currentFeature.title}`, 'info')
     })
 
-    socket.on('session-finished', (data) => {
-      showToast(' Toutes les features ont été estimées !', 'success')
-      setTimeout(() => {
-        navigate('/')
-      }, 3000)
-    })
-
     socket.on('error', (data) => {
-      showToast(` ${data.message}`, 'error')
+      showToast(`❌ ${data.message}`, 'error')
     })
 
     if (features && features.length > 0) {
@@ -116,7 +115,6 @@ export default function GameRoom() {
       socket.off('new-round-started')
       socket.off('session-resumed')
       socket.off('next-feature')
-      socket.off('session-finished')
       socket.off('error')
     }
   }, [navigate, features])
@@ -168,15 +166,39 @@ export default function GameRoom() {
   }
   
   const handleEndSession = () => {
-    showToast(' Téléchargement des résultats...', 'success')
+    showToast('📥 Téléchargement des résultats...', 'success')
     
     // Préparer les données de résultats
     const resultsData = {
       sessionId,
       finishedAt: new Date().toISOString(),
       mode,
-      estimations: result.estimations || [],
-      totalFeatures: features?.length || 0
+      totalFeatures: features?.length || 0,
+      estimatedFeatures: result?.estimations?.length || 0,
+      pm: pmData?.name || userName,
+      players: players.map(p => p.name),
+      estimations: result?.estimations || [],
+      features: features?.map((feature, index) => ({
+        id: feature.id || index,
+        name: feature.name || feature.title,
+        description: feature.description,
+        priority: feature.priority,
+        assignedTo: feature.assignedTo,
+        estimation: result?.estimations?.[index]?.estimation || 'Non estimée',
+        rounds: result?.estimations?.[index]?.rounds || 0,
+        isUnanimous: result?.estimations?.[index]?.isUnanimous || false
+      })),
+      summary: {
+        totalStoryPoints: result?.estimations?.reduce((sum, est) => sum + (est.estimation || 0), 0) || 0,
+        averagePerFeature: result?.estimations?.length 
+          ? Math.round((result.estimations.reduce((sum, est) => sum + (est.estimation || 0), 0) / result.estimations.length) * 10) / 10 
+          : 0,
+        totalRounds: result?.estimations?.reduce((sum, est) => sum + (est.rounds || 1), 0) || 0,
+        unanimousDecisions: result?.estimations?.filter(est => est.isUnanimous).length || 0,
+        averageRoundsPerFeature: result?.estimations?.length 
+          ? Math.round((result.estimations.reduce((sum, est) => sum + (est.rounds || 1), 0) / result.estimations.length) * 10) / 10 
+          : 0
+      }
     }
     
     // Télécharger le fichier JSON
@@ -184,7 +206,7 @@ export default function GameRoom() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `planning-poker-results-${sessionId}.json`
+    a.download = `planning-poker-results-${sessionId}-${new Date().toISOString().split('T')[0]}.json`
     a.click()
     URL.revokeObjectURL(url)
     
@@ -193,6 +215,14 @@ export default function GameRoom() {
       socket.disconnect()
       navigate('/')
     }, 1500)
+  }
+
+  const handleEndSessionManually = () => {
+    if (window.confirm('Êtes-vous sûr de vouloir terminer la session maintenant ? Les features non estimées seront ignorées.')) {
+      const socket = getSocket()
+      socket.emit('end-session-manually', { sessionId })
+      showToast('Terminaison de la session en cours...', 'warning')
+    }
   }
 
   const handleQuit = () => {
@@ -288,7 +318,7 @@ export default function GameRoom() {
                 </div>
                 
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                   {feature.name || feature.title}
+                  📋 {feature.name || feature.title}
                 </h2>
                 
                 <p className="text-gray-600 mb-4 leading-relaxed">
@@ -342,7 +372,7 @@ export default function GameRoom() {
                       
                       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-4 mb-6 max-w-md mx-auto">
                         <p className="text-blue-600 text-sm mb-2">
-                           Fichier de sauvegarde téléchargé
+                          📥 Fichier de sauvegarde téléchargé
                         </p>
                         <p className="text-gray-800 font-mono text-xs">
                           planning-poker-save-{sessionId}.json
@@ -384,7 +414,7 @@ export default function GameRoom() {
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
                     <h3 className="text-xl font-bold text-gray-800 mb-4">
-                      {hasVoted ? '✅ Vote enregistré' : ' Sélectionnez votre carte'}
+                      {hasVoted ? '✅ Vote enregistré' : '🃏 Sélectionnez votre carte'}
                     </h3>
                     
                     {/* Cards grid */}
@@ -453,7 +483,10 @@ export default function GameRoom() {
                     
                     <div className="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-4 mb-6">
                       <p className="text-emerald-600 text-center font-semibold">
-                        🎉 Tous les joueurs ont voté !
+                        {result?.isSessionFinished 
+                          ? '🏁 Toutes les features ont été estimées !' 
+                          : '🎉 Tous les joueurs ont voté !'
+                        }
                       </p>
                     </div>
 
@@ -512,7 +545,7 @@ export default function GameRoom() {
                     </div>
 
                     {/* Analysis */}
-                    {stats && (
+                    {stats && stats.average > 0 && (
                       <div className="bg-blue-50 rounded-xl p-4 mb-6 border border-blue-200">
                         <h4 className="text-gray-800 font-semibold mb-3">📊 Analyse :</h4>
                         <div className="grid grid-cols-2 gap-4 text-sm">
@@ -538,7 +571,26 @@ export default function GameRoom() {
 
                     {/* Result */}
                     {result && (
-                      result.needsNewRound ? (
+                      result.isSessionFinished ? (
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl p-4 mb-6">
+                          <h3 className="text-2xl font-bold text-green-700 text-center mb-2">
+                            🎉 Session Terminée !
+                          </h3>
+                          <p className="text-green-600 text-center mb-4">
+                            Toutes les {totalFeatures} features ont été estimées avec succès.
+                          </p>
+                          <div className="bg-white rounded-lg p-4">
+                            <p className="text-sm text-gray-700 mb-2">
+                              📊 <strong>Résumé :</strong>
+                            </p>
+                            <ul className="text-sm text-gray-600 space-y-1">
+                              <li>• Mode : <strong className="text-gray-800 capitalize">{mode}</strong></li>
+                              <li>• Features estimées : <strong className="text-gray-800">{result.estimations?.length || totalFeatures}</strong></li>
+                              <li>• Session : <strong className="text-gray-800">{sessionId}</strong></li>
+                            </ul>
+                          </div>
+                        </div>
+                      ) : result.needsNewRound ? (
                         <div className="bg-amber-50 border-2 border-amber-400 rounded-xl p-4 mb-6">
                           <p className="text-amber-700 text-center font-bold text-xl">
                              {result.message}
@@ -565,26 +617,8 @@ export default function GameRoom() {
                         {result && result.isSessionFinished ? (
                           // Fin de session
                           <div>
-                            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl p-6 mb-4">
-                              <h3 className="text-2xl font-bold text-green-700 text-center mb-2">
-                                🎉 Session Terminée !
-                              </h3>
-                              <p className="text-green-600 text-center mb-4">
-                                Toutes les {totalFeatures} features ont été estimées avec succès.
-                              </p>
-                              <div className="bg-white rounded-lg p-4">
-                                <p className="text-sm text-gray-700 mb-2">
-                                  📊 <strong>Résumé :</strong>
-                                </p>
-                                <ul className="text-sm text-gray-600 space-y-1">
-                                  <li>• Mode : <strong className="text-gray-800 capitalize">{mode}</strong></li>
-                                  <li>• Features estimées : <strong className="text-gray-800">{result.estimations?.length || totalFeatures}</strong></li>
-                                  <li>• Session : <strong className="text-gray-800">{sessionId}</strong></li>
-                                </ul>
-                              </div>
-                            </div>
                             <Button variant="success" size="lg" fullWidth onClick={handleEndSession}>
-                               Télécharger les Résultats et Terminer
+                              📥 Télécharger les Résultats et Terminer
                             </Button>
                           </div>
                         ) : result && result.needsNewRound ? (
@@ -600,6 +634,18 @@ export default function GameRoom() {
                               🔄 Refaire un Tour
                             </Button>
                           </>
+                        )}
+                        
+                        {/* Bouton pour terminer manuellement (optionnel) */}
+                        {isPM && !result?.isSessionFinished && currentFeatureIndex < totalFeatures - 1 && (
+                          <Button 
+                            variant="danger" 
+                            size="sm" 
+                            className="mt-2"
+                            onClick={handleEndSessionManually}
+                          >
+                            🏁 Terminer la Session Maintenant
+                          </Button>
                         )}
                       </div>
                     ) : (
