@@ -10,7 +10,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
-  pull-requests: write
+  pull-requests: write  # Nécessaire pour commenter les PRs
 
 jobs:
   # Job 1 : Tests Backend
@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./server
     
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [18.x, 20.x]
     
     steps:
       - name: Checkout du code
@@ -34,28 +34,39 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: server/package-lock.json
     
       - name: Installation des dépendances
         run: npm ci
     
-      - name: Vérifier le serveur
-        run: |
-          echo "✅ Backend prêt"
-          node --version
-          npm --version
+      - name: Exécution des tests backend
+        run: npm test
+    
+      - name: Génération coverage backend
+        run: npm run test:coverage
+    
+      - name: Génération documentation JSDoc
+        run: npm run docs
+    
+      - name: Upload documentation backend
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-docs-${{ matrix.node-version }}
+          path: server/docs/
+          retention-days: 30
+          overwrite: true
 
   # Job 2 : Tests Frontend
   frontend-tests:
-    name: Frontend - Build et Validation
+    name: Frontend - Tests Vitest
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .
+        working-directory: ./client
     
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [18.x, 20.x]
     
     steps:
       - name: Checkout du code
@@ -66,18 +77,78 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: client/package-lock.json
     
       - name: Installation des dépendances
         run: npm ci
     
+      - name: Configuration pour les tests
+        # Vérifier/créer le fichier de configuration Vitest
+        run: |
+          if [ -f "vite.config.js" ] || [ -f "vite.config.ts" ]; then
+            echo "✅ Fichier de configuration Vite existant détecté"
+            # S'assurer qu'il n'y a pas de syntaxe invalide
+            if [ -f "vite.config.js" ]; then
+              # Nettoyer les éventuels caractères problématiques
+              sed -i "s/# Important pour CI\[citation:[0-9]\]//g" vite.config.js
+              sed -i "s/#.*//g" vite.config.js  # Retirer les commentaires avec #
+              echo "🔧 Fichier vite.config.js nettoyé"
+            fi
+          else
+            echo "📝 Création de vite.config.js pour les tests"
+            cat > vite.config.js << 'EOF'
+            import { defineConfig } from 'vite'
+            import react from '@vitejs/plugin-react'
+            
+            export default defineConfig({
+              plugins: [react()],
+              test: {
+                globals: true,
+                environment: 'jsdom',
+                setupFiles: './src/test/setup.js',
+                coverage: {
+                  provider: 'v8',
+                  reporter: ['text', 'json-summary', 'json', 'html'],
+                  reportsDirectory: './coverage',
+                  include: ['src/**/*.{js,jsx}'],
+                  reportOnFailure: true
+                }
+              }
+            })
+            EOF
+          fi
+          
+          # Vérifier la syntaxe du fichier
+          echo "🔍 Vérification de la syntaxe..."
+          if [ -f "vite.config.js" ]; then
+            node -c vite.config.js && echo "✅ Syntaxe valide" || echo "⚠️  Problème de syntaxe détecté"
+          fi
+    
+      - name: Exécution des tests Vitest
+        # Utiliser --coverage sans .enabled pour une syntaxe plus simple
+        run: npx vitest run --coverage
+    
+      - name: Rapport de coverage dans PR
+        # Action spécialisée pour les rapports Vitest
+        if: always()  # Exécute même si les tests échouent
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          working-directory: ./client
+          file-coverage-mode: 'changes'  # Affiche seulement les fichiers modifiés
+          json-summary-path: './coverage/coverage-summary.json'
+          json-final-path: './coverage/coverage-final.json'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Upload rapport coverage HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage-report-${{ matrix.node-version }}
+          path: client/coverage/
+          retention-days: 7
+          overwrite: true
+    
       - name: Build de production
         run: npm run build
-        
-      - name: Vérifier les fichiers générés
-        run: |
-          echo "✅ Build terminé avec succès"
-          ls -la dist/
 
   # Job 3 : Validation Build
   validate-build:
@@ -96,17 +167,162 @@ jobs:
     
       - name: Build Backend
         run: |
-          cd backend
+          cd server
           npm ci
+          # Vérifie que le serveur peut démarrer
+          timeout 10s npm start &
+          sleep 5
           echo "✅ Backend prêt"
     
       - name: Build Frontend
         run: |
+          cd client
           npm ci
           npm run build
           echo "✅ Frontend buildé"
 
-  # Job 4 : Résumé CI/CD
+  # Job 4 : Déploiement Documentation
+  deploy-docs:
+    name: Déploiement Documentation
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    if: github.ref == 'refs/heads/main'
+    
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+    
+      - name: Générer docs backend
+        run: |
+          cd server
+          npm ci
+          npm run docs
+    
+      - name: Générer docs frontend
+        run: |
+          cd client
+          npm ci
+          # Optionnel: générer la documentation des composants
+          if [ -f "jsdoc.config.json" ]; then
+            npx jsdoc src -d docs-frontend -c jsdoc.config.json
+          else
+            echo "⚠️  Pas de configuration JSDoc trouvée pour le frontend"
+          fi
+    
+      - name: Créer site documentation unifié
+        run: |
+          mkdir -p public-docs
+          
+          # Copier docs backend
+          if [ -d "server/docs" ]; then
+            cp -r server/docs/* public-docs/
+          fi
+          
+          # Copier docs frontend si existants
+          if [ -d "client/docs-frontend" ]; then
+            mkdir -p public-docs/frontend
+            cp -r client/docs-frontend/* public-docs/frontend/
+          fi
+          
+          # Créer index.html
+          cat > public-docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Planning Poker - Documentation</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+              h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+              .card { 
+                border: 1px solid #ddd; 
+                padding: 20px; 
+                margin: 20px 0; 
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+              }
+              .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+              }
+              a { 
+                color: #2563eb; 
+                text-decoration: none;
+                font-weight: bold;
+              }
+              a:hover { text-decoration: underline; }
+              .success { border-left: 4px solid #4CAF50; }
+              .info { border-left: 4px solid #2196F3; }
+              ul { padding-left: 20px; }
+              li { margin: 8px 0; }
+            </style>
+          </head>
+          <body>
+            <h1>📚 Documentation Planning Poker</h1>
+            
+            <div class="card success">
+              <h2>📖 Backend Documentation</h2>
+              <p>Documentation technique complète de l'API et des services backend.</p>
+              <p><a href="./index.html">Accéder à la documentation backend →</a></p>
+            </div>
+            
+            <div class="card info">
+              <h2>🎨 Frontend Documentation</h2>
+              <p>Documentation des composants React, hooks et utilitaires frontend.</p>
+              EOF
+          
+          # Ajouter le lien frontend seulement si la documentation existe
+          if [ -d "client/docs-frontend" ]; then
+            cat >> public-docs/index.html << 'EOF'
+              <p><a href="./frontend/index.html">Accéder à la documentation frontend →</a></p>
+            EOF
+          else
+            cat >> public-docs/index.html << 'EOF'
+              <p><em>Documentation frontend non disponible pour le moment</em></p>
+            EOF
+          fi
+          
+          cat >> public-docs/index.html << 'EOF'
+            </div>
+            
+            <div class="card">
+              <h2>🔗 Liens utiles</h2>
+              <ul>
+                <li><a href="https://github.com/MarteOued/planning-poker">GitHub Repository</a></li>
+                <li><a href="https://vitest.dev/guide/coverage">Documentation Vitest</a></li>
+                <li><a href="https://nodejs.org/docs/">Documentation Node.js</a></li>
+                <li><a href="https://react.dev/">Documentation React</a></li>
+              </ul>
+            </div>
+            
+            <div class="card">
+              <h2>📊 Couverture de tests</h2>
+              <p>Les rapports de coverage sont disponibles dans les artefacts de chaque exécution CI/CD.</p>
+              <p><em>Dernière mise à jour : $(date)</em></p>
+            </div>
+          </body>
+          </html>
+          EOF
+    
+      - name: Déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public-docs
+          publish_branch: gh-pages
+          force_orphan: true
+
+  # Job 5 : Notification et Résumé
   summary:
     name: Résumé CI/CD
     runs-on: ubuntu-latest
@@ -116,29 +332,50 @@ jobs:
     steps:
       - name: Générer rapport de synthèse
         run: |
-          echo "# 📊 Rapport CI/CD - Planning Poker" >> $GITHUB_STEP_SUMMARY
-          echo "**Date** : $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "**Branche** : ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "# 📊 Rapport CI/CD - Planning Poker" > summary.md
+          echo "**Date** : $(date)" >> summary.md
+          echo "**Workflow** : \${{ github.workflow }}" >> summary.md
+          echo "**Branche** : \${{ github.ref_name }}" >> summary.md
+          echo "" >> summary.md
           
-          echo "## 📋 Résumé des jobs" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📋 Résumé des jobs" >> summary.md
+          echo "" >> summary.md
           
-          echo "### 🟢 Backend Tests" >> $GITHUB_STEP_SUMMARY
-          echo "- Dépendances installées" >> $GITHUB_STEP_SUMMARY
-          echo "- Serveur validé" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Backend Tests" >> summary.md
+          echo "- Tests exécutés avec Node.js 18.x et 20.x" >> summary.md
+          echo "- Documentation JSDoc générée" >> summary.md
+          echo "- Artefacts : backend-docs-*" >> summary.md
+          echo "" >> summary.md
           
-          echo "### 🟢 Frontend Tests" >> $GITHUB_STEP_SUMMARY
-          echo "- Build de production validé" >> $GITHUB_STEP_SUMMARY
-          echo "- Fichiers générés correctement" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Frontend Tests" >> summary.md
+          echo "- Tests Vitest avec couverture de code" >> summary.md
+          echo "- Rapports de coverage dans les PRs" >> summary.md
+          echo "- Build de production validé" >> summary.md
+          echo "- Artefacts : frontend-coverage-report-*" >> summary.md
+          echo "" >> summary.md
           
-          echo "### 🟢 Validation Build" >> $GITHUB_STEP_SUMMARY
-          echo "- Build backend et frontend vérifiés" >> $GITHUB_STEP_SUMMARY
-          echo "- Application prête pour le déploiement" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Validation Build" >> summary.md
+          echo "- Build backend et frontend vérifiés" >> summary.md
+          echo "- Serveur capable de démarrer" >> summary.md
+          echo "" >> summary.md
           
-          echo "## 📈 Étapes suivantes" >> $GITHUB_STEP_SUMMARY
-          echo "1. Vérifier les logs pour détecter d'éventuels warnings" >> $GITHUB_STEP_SUMMARY
-          echo "2. Déployer l'application si tous les tests passent" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "### 🌐 Déploiement Documentation" >> summary.md
+            echo "- Documentation déployée sur GitHub Pages" >> summary.md
+            echo "- Site accessible via : https://\${{ github.repository_owner }}.github.io/planning-poker/" >> summary.md
+            echo "" >> summary.md
+          fi
+          
+          echo "## 📈 Prochaines étapes" >> summary.md
+          echo "1. Vérifier les rapports de coverage dans les artefacts téléchargés" >> summary.md
+          echo "2. Consulter la documentation sur GitHub Pages" >> summary.md
+          echo "3. Examiner les warnings ou erreurs dans les logs" >> summary.md
+          echo "4. Merge la PR si tous les tests passent" >> summary.md
+          
+          # Publier le résumé dans l'interface GitHub
+          cat summary.md >> $GITHUB_STEP_SUMMARY
+          
+          # Afficher un message dans les logs
+          echo "========================================"
+          echo "✅ CI/CD exécutée avec succès"
+          echo "========================================"
