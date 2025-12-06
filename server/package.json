@@ -9,7 +9,11 @@
     "docs": "jsdoc -c jsdoc.json",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "docs:serve": "npx http-server docs -p 8080"
+    "docs:serve": "npx http-server docs -p 8080",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "ci:test": "jest --coverage --coverageReporters=json-summary",
+    "ci:docs": "jsdoc src -d docs -c jsdoc.json --readme README.md"
   },
   "keywords": [
     "socket.io",

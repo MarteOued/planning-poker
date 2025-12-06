@@ -16,7 +16,11 @@
     "test:ui": "vitest --ui",
     "coverage:report": "vitest run --coverage --coverage.thresholds=false --reporter=html",
     "docs": "jsdoc -c jsdoc.json src/components src/pages src/stores src/utils",
-    "docs:serve": "npx http-server docs -p 3003"
+    "docs:serve": "npx http-server docs -p 3003",
+    "lint:fix": "eslint src --ext js,jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\"",
+    "ci:test": "vitest run --coverage.enabled=true --coverage.reporter=json-summary --coverage.reporter=json",
+    "ci:build": "vite build --mode production"
   },
   "dependencies": {
     "framer-motion": "^12.23.25",
