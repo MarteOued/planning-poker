@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>BacklogManager - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/MarteOued/planning-poker" target="_blank" >Documentation</a></h2><h3>Classes</h3><ul><li><a href="BacklogManager.html">BacklogManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="BacklogManager.html#addFeature">addFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#cloneBacklog">cloneBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getAllFeatures">getAllFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getCompletedFeatures">getCompletedFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getRemainingFeatures">getRemainingFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#parseBacklog">parseBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#removeFeature">removeFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#reorderFeatures">reorderFeatures</a></li></ul></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Feature.html#addVote">addVote</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersCoffee">allPlayersCoffee</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersVoted">allPlayersVoted</a></li><li data-type='method' style='display: none;'><a href="Feature.html#clearVotes">clearVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#getCurrentRoundVotes">getCurrentRoundVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#setEstimate">setEstimate</a></li><li data-type='method' style='display: none;'><a href="Feature.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="Feature.html#toJSON">toJSON</a></li></ul></li><li><a href="FileManager.html">FileManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileManager.html#cleanOldSessions">cleanOldSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#createDownloadableJSON">createDownloadableJSON</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#ensureDirectories">ensureDirectories</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#exportResults">exportResults</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#listSavedSessions">listSavedSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#loadSession">loadSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#parseBacklogFile">parseBacklogFile</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#saveSession">saveSession</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Player.html#resetVote">resetVote</a></li><li data-type='method' style='display: none;'><a href="Player.html#toJSON">toJSON</a></li><li data-type='method' style='display: none;'><a href="Player.html#vote">vote</a></li></ul></li><li><a href="SessionManager.html">SessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SessionManager.html#createSession">createSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getAllSessions">getAllSessions</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSession">getSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSessionByCode">getSessionByCode</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#joinSession">joinSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#removePlayerFromSession">removePlayerFromSession</a></li></ul></li><li><a href="Vote.html">Vote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Vote.html#getNumericValue">getNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isCoffeeCard">isCoffeeCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isNumericValue">isNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isUnknownCard">isUnknownCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#toJSON">toJSON</a></li></ul></li><li><a href="VotingManager.html">VotingManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="VotingManager.html#checkAllVoted">checkAllVoted</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#getVotingResults">getVotingResults</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#moveToNextFeature">moveToNextFeature</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#submitVote">submitVote</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#validateVotes">validateVotes</a></li></ul></li><li><a href="module-models_Session-Session.html">Session</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#addPlayer">addPlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getCurrentFeature">getCurrentFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#isCompleted">isCompleted</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#loadBacklog">loadBacklog</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#nextFeature">nextFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#removePlayer">removePlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#start">start</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#toJSON">toJSON</a></li></ul></li><li></li></ul><h3>Modules</h3><ul><li><a href="module-models_Session.html">models/Session</a></li><li><a href="module-utils_calculator.html">utils/calculator</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~allVotesCoffee">allVotesCoffee</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~calculateAverage">calculateAverage</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~checkUnanimity">checkUnanimity</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~getUnanimousValue">getUnanimousValue</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~validateEstimation">validateEstimation</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#VALID_CARD_VALUES">VALID_CARD_VALUES</a></li><li><a href="global.html#VALID_GAME_MODES">VALID_GAME_MODES</a></li><li><a href="global.html#isValidCardValue">isValidCardValue</a></li><li><a href="global.html#isValidGameMode">isValidGameMode</a></li><li><a href="global.html#isValidSessionCode">isValidSessionCode</a></li><li><a href="global.html#validateBacklog">validateBacklog</a></li><li><a href="global.html#validateFeature">validateFeature</a></li><li><a href="global.html#validatePseudo">validatePseudo</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">BacklogManager</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        
+            BacklogManager
+        
+        </h2>
+        
+            <div class="class-description usertext"><p>Gestionnaire de backlog</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="BacklogManager"><span class="type-signature"></span>new BacklogManager<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="addFeature"><span class="type-signature"></span>addFeature<span class="signature">(session, name, description)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Ajoute une fonctionnalité au backlog d'une session</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Nom de la fonctionnalité</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Description</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>{ success: boolean, feature: Feature|null, error: string|null }</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="cloneBacklog"><span class="type-signature"></span>cloneBacklog<span class="signature">(features)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Clone un backlog pour une nouvelle session</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line175">line 175</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>features</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Features à cloner</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAllFeatures"><span class="type-signature"></span>getAllFeatures<span class="signature">(session)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Récupère toutes les fonctionnalités du backlog</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getCompletedFeatures"><span class="type-signature"></span>getCompletedFeatures<span class="signature">(session)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Récupère les fonctionnalités complétées</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line106">line 106</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getProgress"><span class="type-signature"></span>getProgress<span class="signature">(session)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Calcule la progression du backlog</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getRemainingFeatures"><span class="type-signature"></span>getRemainingFeatures<span class="signature">(session)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Récupère les fonctionnalités restantes</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line117">line 117</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="parseBacklog"><span class="type-signature"></span>parseBacklog<span class="signature">(backlogData)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Parse et valide un backlog JSON</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>backlogData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Données du backlog</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>{ success: boolean, features: Array|null, error: string|null }</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeFeature"><span class="type-signature"></span>removeFeature<span class="signature">(session, featureId)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Supprime une fonctionnalité du backlog</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>featureId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ID de la fonctionnalité</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reorderFeatures"><span class="type-signature"></span>reorderFeatures<span class="signature">(session, newOrder)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Réordonne les fonctionnalités du backlog</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_BacklogManager.js.html">managers/BacklogManager.js</a>, <a href="managers_BacklogManager.js.html#line148">line 148</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>session</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Session</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Session concernée</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newOrder</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Tableau des IDs dans le nouvel ordre</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

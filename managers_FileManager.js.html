@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>managers/FileManager.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/MarteOued/planning-poker" target="_blank" >Documentation</a></h2><h3>Classes</h3><ul><li><a href="BacklogManager.html">BacklogManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="BacklogManager.html#addFeature">addFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#cloneBacklog">cloneBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getAllFeatures">getAllFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getCompletedFeatures">getCompletedFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getRemainingFeatures">getRemainingFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#parseBacklog">parseBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#removeFeature">removeFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#reorderFeatures">reorderFeatures</a></li></ul></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Feature.html#addVote">addVote</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersCoffee">allPlayersCoffee</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersVoted">allPlayersVoted</a></li><li data-type='method' style='display: none;'><a href="Feature.html#clearVotes">clearVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#getCurrentRoundVotes">getCurrentRoundVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#setEstimate">setEstimate</a></li><li data-type='method' style='display: none;'><a href="Feature.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="Feature.html#toJSON">toJSON</a></li></ul></li><li><a href="FileManager.html">FileManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileManager.html#cleanOldSessions">cleanOldSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#createDownloadableJSON">createDownloadableJSON</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#ensureDirectories">ensureDirectories</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#exportResults">exportResults</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#listSavedSessions">listSavedSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#loadSession">loadSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#parseBacklogFile">parseBacklogFile</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#saveSession">saveSession</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Player.html#resetVote">resetVote</a></li><li data-type='method' style='display: none;'><a href="Player.html#toJSON">toJSON</a></li><li data-type='method' style='display: none;'><a href="Player.html#vote">vote</a></li></ul></li><li><a href="SessionManager.html">SessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SessionManager.html#createSession">createSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getAllSessions">getAllSessions</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSession">getSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSessionByCode">getSessionByCode</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#joinSession">joinSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#removePlayerFromSession">removePlayerFromSession</a></li></ul></li><li><a href="Vote.html">Vote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Vote.html#getNumericValue">getNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isCoffeeCard">isCoffeeCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isNumericValue">isNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isUnknownCard">isUnknownCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#toJSON">toJSON</a></li></ul></li><li><a href="VotingManager.html">VotingManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="VotingManager.html#checkAllVoted">checkAllVoted</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#getVotingResults">getVotingResults</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#moveToNextFeature">moveToNextFeature</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#submitVote">submitVote</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#validateVotes">validateVotes</a></li></ul></li><li><a href="module-models_Session-Session.html">Session</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#addPlayer">addPlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getCurrentFeature">getCurrentFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#isCompleted">isCompleted</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#loadBacklog">loadBacklog</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#nextFeature">nextFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#removePlayer">removePlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#start">start</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#toJSON">toJSON</a></li></ul></li><li></li></ul><h3>Modules</h3><ul><li><a href="module-models_Session.html">models/Session</a></li><li><a href="module-utils_calculator.html">utils/calculator</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~allVotesCoffee">allVotesCoffee</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~calculateAverage">calculateAverage</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~checkUnanimity">checkUnanimity</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~getUnanimousValue">getUnanimousValue</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~validateEstimation">validateEstimation</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#VALID_CARD_VALUES">VALID_CARD_VALUES</a></li><li><a href="global.html#VALID_GAME_MODES">VALID_GAME_MODES</a></li><li><a href="global.html#isValidCardValue">isValidCardValue</a></li><li><a href="global.html#isValidGameMode">isValidGameMode</a></li><li><a href="global.html#isValidSessionCode">isValidSessionCode</a></li><li><a href="global.html#validateBacklog">validateBacklog</a></li><li><a href="global.html#validateFeature">validateFeature</a></li><li><a href="global.html#validatePseudo">validatePseudo</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">managers/FileManager.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const fs = require('fs').promises;
+const path = require('path');
+
+/**
+ * Gestionnaire de fichiers pour import/export
+ */
+class FileManager {
+  constructor() {
+    this.dataDir = path.join(__dirname, '../../data');
+    this.sessionsDir = path.join(this.dataDir, 'sessions');
+    this.exportsDir = path.join(this.dataDir, 'exports');
+    
+    this.ensureDirectories();
+  }
+
+  /**
+   * Crée les dossiers nécessaires s'ils n'existent pas
+   */
+  async ensureDirectories() {
+    try {
+      await fs.mkdir(this.dataDir, { recursive: true });
+      await fs.mkdir(this.sessionsDir, { recursive: true });
+      await fs.mkdir(this.exportsDir, { recursive: true });
+    } catch (error) {
+      console.error('Error creating directories:', error);
+    }
+  }
+
+  /**
+   * Sauvegarde une session dans un fichier JSON
+   * @param {string} sessionCode - Code de la session
+   * @param {Object} sessionData - Données de la session
+   * @returns {Promise&lt;Object>} { success: boolean, filePath: string|null, error: string|null }
+   */
+  async saveSession(sessionCode, sessionData) {
+    try {
+      const fileName = `session-${sessionCode}-${Date.now()}.json`;
+      const filePath = path.join(this.sessionsDir, fileName);
+      
+      const jsonData = JSON.stringify(sessionData, null, 2);
+      await fs.writeFile(filePath, jsonData, 'utf8');
+      
+      console.log(`Session saved to file: ${fileName}`);
+      
+      return {
+        success: true,
+        filePath: filePath,
+        fileName: fileName,
+        error: null
+      };
+    } catch (error) {
+      console.error('Error saving session:', error);
+      return {
+        success: false,
+        filePath: null,
+        fileName: null,
+        error: error.message
+      };
+    }
+  }
+
+  /**
+   * Charge une session depuis un fichier JSON
+   * @param {string} fileName - Nom du fichier
+   * @returns {Promise&lt;Object>} { success: boolean, data: Object|null, error: string|null }
+   */
+  async loadSession(fileName) {
+    try {
+      const filePath = path.join(this.sessionsDir, fileName);
+      const jsonData = await fs.readFile(filePath, 'utf8');
+      const data = JSON.parse(jsonData);
+      
+      console.log(`Session loaded from file: ${fileName}`);
+      
+      return {
+        success: true,
+        data: data,
+        error: null
+      };
+    } catch (error) {
+      console.error('Error loading session:', error);
+      return {
+        success: false,
+        data: null,
+        error: error.message
+      };
+    }
+  }
+
+  /**
+   * Liste toutes les sessions sauvegardées
+   * @returns {Promise&lt;Array>}
+   */
+  async listSavedSessions() {
+    try {
+      const files = await fs.readdir(this.sessionsDir);
+      const sessionFiles = files.filter(f => f.startsWith('session-') &amp;&amp; f.endsWith('.json'));
+      
+      const sessions = await Promise.all(
+        sessionFiles.map(async (fileName) => {
+          const filePath = path.join(this.sessionsDir, fileName);
+          const stats = await fs.stat(filePath);
+          
+          try {
+            const jsonData = await fs.readFile(filePath, 'utf8');
+            const data = JSON.parse(jsonData);
+            
+            return {
+              fileName: fileName,
+              sessionCode: data.code,
+              mode: data.mode,
+              players: data.players.length,
+              savedAt: stats.mtime,
+              size: stats.size
+            };
+          } catch (error) {
+            return {
+              fileName: fileName,
+              error: 'Could not parse file',
+              savedAt: stats.mtime
+            };
+          }
+        })
+      );
+      
+      return sessions.sort((a, b) => b.savedAt - a.savedAt);
+    } catch (error) {
+      console.error('Error listing sessions:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Exporte les résultats finaux dans un fichier JSON
+   * @param {string} sessionCode - Code de la session
+   * @param {Object} resultsData - Données des résultats
+   * @returns {Promise&lt;Object>} { success: boolean, filePath: string|null, error: string|null }
+   */
+  async exportResults(sessionCode, resultsData) {
+    try {
+      const fileName = `results-${sessionCode}-${Date.now()}.json`;
+      const filePath = path.join(this.exportsDir, fileName);
+      
+      const jsonData = JSON.stringify(resultsData, null, 2);
+      await fs.writeFile(filePath, jsonData, 'utf8');
+      
+      console.log(`Results exported to file: ${fileName}`);
+      
+      return {
+        success: true,
+        filePath: filePath,
+        fileName: fileName,
+        error: null
+      };
+    } catch (error) {
+      console.error('Error exporting results:', error);
+      return {
+        success: false,
+        filePath: null,
+        fileName: null,
+        error: error.message
+      };
+    }
+  }
+
+  /**
+   * Charge un backlog depuis un fichier JSON
+   * @param {Buffer} fileBuffer - Buffer du fichier
+   * @returns {Object} { success: boolean, data: Object|null, error: string|null }
+   */
+  parseBacklogFile(fileBuffer) {
+    try {
+      const jsonString = fileBuffer.toString('utf8');
+      const data = JSON.parse(jsonString);
+      
+      return {
+        success: true,
+        data: data,
+        error: null
+      };
+    } catch (error) {
+      console.error('Error parsing backlog file:', error);
+      return {
+        success: false,
+        data: null,
+        error: 'Invalid JSON format'
+      };
+    }
+  }
+
+  /**
+   * Supprime un fichier de session sauvegardée
+   * @param {string} fileName - Nom du fichier
+   * @returns {Promise&lt;boolean>}
+   */
+  async deleteSession(fileName) {
+    try {
+      const filePath = path.join(this.sessionsDir, fileName);
+      await fs.unlink(filePath);
+      
+      console.log(`Session file deleted: ${fileName}`);
+      
+      return true;
+    } catch (error) {
+      console.error('Error deleting session:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Nettoie les anciennes sessions (plus de 30 jours)
+   * @returns {Promise&lt;number>} Nombre de fichiers supprimés
+   */
+  async cleanOldSessions() {
+    try {
+      const files = await fs.readdir(this.sessionsDir);
+      const now = Date.now();
+      const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
+      
+      let deletedCount = 0;
+      
+      for (let fileName of files) {
+        const filePath = path.join(this.sessionsDir, fileName);
+        const stats = await fs.stat(filePath);
+        
+        if (stats.mtime.getTime() &lt; thirtyDaysAgo) {
+          await fs.unlink(filePath);
+          deletedCount++;
+        }
+      }
+      
+      console.log(`Cleaned ${deletedCount} old session files`);
+      
+      return deletedCount;
+    } catch (error) {
+      console.error('Error cleaning old sessions:', error);
+      return 0;
+    }
+  }
+
+  /**
+   * Crée un fichier JSON téléchargeable
+   * @param {Object} data - Données à convertir
+   * @param {string} filename - Nom du fichier
+   * @returns {Object} { content: string, mimeType: string, filename: string }
+   */
+  createDownloadableJSON(data, filename) {
+    const jsonString = JSON.stringify(data, null, 2);
+    
+    return {
+      content: jsonString,
+      mimeType: 'application/json',
+      filename: filename.endsWith('.json') ? filename : `${filename}.json`
+    };
+  }
+}
+
+const fileManager = new FileManager();
+
+module.exports = fileManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

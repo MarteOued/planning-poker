@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>managers/BacklogManager.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/MarteOued/planning-poker" target="_blank" >Documentation</a></h2><h3>Classes</h3><ul><li><a href="BacklogManager.html">BacklogManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="BacklogManager.html#addFeature">addFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#cloneBacklog">cloneBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getAllFeatures">getAllFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getCompletedFeatures">getCompletedFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getRemainingFeatures">getRemainingFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#parseBacklog">parseBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#removeFeature">removeFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#reorderFeatures">reorderFeatures</a></li></ul></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Feature.html#addVote">addVote</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersCoffee">allPlayersCoffee</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersVoted">allPlayersVoted</a></li><li data-type='method' style='display: none;'><a href="Feature.html#clearVotes">clearVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#getCurrentRoundVotes">getCurrentRoundVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#setEstimate">setEstimate</a></li><li data-type='method' style='display: none;'><a href="Feature.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="Feature.html#toJSON">toJSON</a></li></ul></li><li><a href="FileManager.html">FileManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileManager.html#cleanOldSessions">cleanOldSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#createDownloadableJSON">createDownloadableJSON</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#ensureDirectories">ensureDirectories</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#exportResults">exportResults</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#listSavedSessions">listSavedSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#loadSession">loadSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#parseBacklogFile">parseBacklogFile</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#saveSession">saveSession</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Player.html#resetVote">resetVote</a></li><li data-type='method' style='display: none;'><a href="Player.html#toJSON">toJSON</a></li><li data-type='method' style='display: none;'><a href="Player.html#vote">vote</a></li></ul></li><li><a href="SessionManager.html">SessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SessionManager.html#createSession">createSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getAllSessions">getAllSessions</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSession">getSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSessionByCode">getSessionByCode</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#joinSession">joinSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#removePlayerFromSession">removePlayerFromSession</a></li></ul></li><li><a href="Vote.html">Vote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Vote.html#getNumericValue">getNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isCoffeeCard">isCoffeeCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isNumericValue">isNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isUnknownCard">isUnknownCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#toJSON">toJSON</a></li></ul></li><li><a href="VotingManager.html">VotingManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="VotingManager.html#checkAllVoted">checkAllVoted</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#getVotingResults">getVotingResults</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#moveToNextFeature">moveToNextFeature</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#submitVote">submitVote</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#validateVotes">validateVotes</a></li></ul></li><li><a href="module-models_Session-Session.html">Session</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#addPlayer">addPlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getCurrentFeature">getCurrentFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#isCompleted">isCompleted</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#loadBacklog">loadBacklog</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#nextFeature">nextFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#removePlayer">removePlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#start">start</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#toJSON">toJSON</a></li></ul></li><li></li></ul><h3>Modules</h3><ul><li><a href="module-models_Session.html">models/Session</a></li><li><a href="module-utils_calculator.html">utils/calculator</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~allVotesCoffee">allVotesCoffee</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~calculateAverage">calculateAverage</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~checkUnanimity">checkUnanimity</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~getUnanimousValue">getUnanimousValue</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~validateEstimation">validateEstimation</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#VALID_CARD_VALUES">VALID_CARD_VALUES</a></li><li><a href="global.html#VALID_GAME_MODES">VALID_GAME_MODES</a></li><li><a href="global.html#isValidCardValue">isValidCardValue</a></li><li><a href="global.html#isValidGameMode">isValidGameMode</a></li><li><a href="global.html#isValidSessionCode">isValidSessionCode</a></li><li><a href="global.html#validateBacklog">validateBacklog</a></li><li><a href="global.html#validateFeature">validateFeature</a></li><li><a href="global.html#validatePseudo">validatePseudo</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">managers/BacklogManager.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Feature = require('../models/Feature');
+const { validateBacklog } = require('../utils/validators');
+const { v4: uuidv4 } = require('uuid');
+
+/**
+ * Gestionnaire de backlog
+ */
+class BacklogManager {
+  /**
+   * Parse et valide un backlog JSON
+   * @param {Object} backlogData - Données du backlog
+   * @returns {Object} { success: boolean, features: Array|null, error: string|null }
+   */
+  parseBacklog(backlogData) {
+    const validation = validateBacklog(backlogData);
+    
+    if (!validation.valid) {
+      return {
+        success: false,
+        features: null,
+        error: validation.errors.join(', ')
+      };
+    }
+
+    const features = backlogData.features.map(featureData => {
+      return new Feature(
+        featureData.id || uuidv4(),
+        featureData.name,
+        featureData.description || ''
+      );
+    });
+
+    return {
+      success: true,
+      features: features,
+      error: null
+    };
+  }
+
+  /**
+   * Ajoute une fonctionnalité au backlog d'une session
+   * @param {Session} session - Session concernée
+   * @param {string} name - Nom de la fonctionnalité
+   * @param {string} description - Description
+   * @returns {Object} { success: boolean, feature: Feature|null, error: string|null }
+   */
+  addFeature(session, name, description = '') {
+    if (!name || name.trim() === '') {
+      return {
+        success: false,
+        feature: null,
+        error: 'Feature name cannot be empty'
+      };
+    }
+
+    const feature = new Feature(uuidv4(), name.trim(), description.trim());
+    session.backlog.push(feature);
+
+    console.log(`Feature added to session ${session.code}: ${name}`);
+
+    return {
+      success: true,
+      feature: feature,
+      error: null
+    };
+  }
+
+  /**
+   * Supprime une fonctionnalité du backlog
+   * @param {Session} session - Session concernée
+   * @param {string} featureId - ID de la fonctionnalité
+   * @returns {boolean}
+   */
+  removeFeature(session, featureId) {
+    const index = session.backlog.findIndex(f => f.id === featureId);
+    
+    if (index === -1) {
+      return false;
+    }
+
+    if (index &lt; session.currentFeatureIndex) {
+      session.currentFeatureIndex--;
+    }
+
+    session.backlog.splice(index, 1);
+    
+    console.log(`Feature ${featureId} removed from session ${session.code}`);
+    
+    return true;
+  }
+
+  /**
+   * Récupère toutes les fonctionnalités du backlog
+   * @param {Session} session - Session concernée
+   * @returns {Array}
+   */
+  getAllFeatures(session) {
+    return session.backlog.map(f => f.toJSON());
+  }
+
+  /**
+   * Récupère les fonctionnalités complétées
+   * @param {Session} session - Session concernée
+   * @returns {Array}
+   */
+  getCompletedFeatures(session) {
+    return session.backlog
+      .filter(f => f.completed)
+      .map(f => f.toJSON());
+  }
+
+  /**
+   * Récupère les fonctionnalités restantes
+   * @param {Session} session - Session concernée
+   * @returns {Array}
+   */
+  getRemainingFeatures(session) {
+    return session.backlog
+      .filter(f => !f.completed)
+      .map(f => f.toJSON());
+  }
+
+  /**
+   * Calcule la progression du backlog
+   * @param {Session} session - Session concernée
+   * @returns {Object}
+   */
+  getProgress(session) {
+    const total = session.backlog.length;
+    const completed = session.backlog.filter(f => f.completed).length;
+    const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    return {
+      total: total,
+      completed: completed,
+      remaining: total - completed,
+      percentage: percentage,
+      currentIndex: session.currentFeatureIndex
+    };
+  }
+
+  /**
+   * Réordonne les fonctionnalités du backlog
+   * @param {Session} session - Session concernée
+   * @param {Array} newOrder - Tableau des IDs dans le nouvel ordre
+   * @returns {boolean}
+   */
+  reorderFeatures(session, newOrder) {
+    if (newOrder.length !== session.backlog.length) {
+      return false;
+    }
+
+    const reorderedBacklog = [];
+    
+    for (let id of newOrder) {
+      const feature = session.backlog.find(f => f.id === id);
+      if (!feature) {
+        return false;
+      }
+      reorderedBacklog.push(feature);
+    }
+
+    session.backlog = reorderedBacklog;
+    
+    console.log(`Backlog reordered for session ${session.code}`);
+    
+    return true;
+  }
+
+  /**
+   * Clone un backlog pour une nouvelle session
+   * @param {Array} features - Features à cloner
+   * @returns {Array}
+   */
+  cloneBacklog(features) {
+    return features.map(f => {
+      return new Feature(
+        uuidv4(),
+        f.name,
+        f.description
+      );
+    });
+  }
+}
+
+const backlogManager = new BacklogManager();
+
+module.exports = backlogManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

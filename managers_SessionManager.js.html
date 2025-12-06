@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>managers/SessionManager.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/MarteOued/planning-poker" target="_blank" >Documentation</a></h2><h3>Classes</h3><ul><li><a href="BacklogManager.html">BacklogManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="BacklogManager.html#addFeature">addFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#cloneBacklog">cloneBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getAllFeatures">getAllFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getCompletedFeatures">getCompletedFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getRemainingFeatures">getRemainingFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#parseBacklog">parseBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#removeFeature">removeFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#reorderFeatures">reorderFeatures</a></li></ul></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Feature.html#addVote">addVote</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersCoffee">allPlayersCoffee</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersVoted">allPlayersVoted</a></li><li data-type='method' style='display: none;'><a href="Feature.html#clearVotes">clearVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#getCurrentRoundVotes">getCurrentRoundVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#setEstimate">setEstimate</a></li><li data-type='method' style='display: none;'><a href="Feature.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="Feature.html#toJSON">toJSON</a></li></ul></li><li><a href="FileManager.html">FileManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileManager.html#cleanOldSessions">cleanOldSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#createDownloadableJSON">createDownloadableJSON</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#ensureDirectories">ensureDirectories</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#exportResults">exportResults</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#listSavedSessions">listSavedSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#loadSession">loadSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#parseBacklogFile">parseBacklogFile</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#saveSession">saveSession</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Player.html#resetVote">resetVote</a></li><li data-type='method' style='display: none;'><a href="Player.html#toJSON">toJSON</a></li><li data-type='method' style='display: none;'><a href="Player.html#vote">vote</a></li></ul></li><li><a href="SessionManager.html">SessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SessionManager.html#createSession">createSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getAllSessions">getAllSessions</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSession">getSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSessionByCode">getSessionByCode</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#joinSession">joinSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#removePlayerFromSession">removePlayerFromSession</a></li></ul></li><li><a href="Vote.html">Vote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Vote.html#getNumericValue">getNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isCoffeeCard">isCoffeeCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isNumericValue">isNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isUnknownCard">isUnknownCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#toJSON">toJSON</a></li></ul></li><li><a href="VotingManager.html">VotingManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="VotingManager.html#checkAllVoted">checkAllVoted</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#getVotingResults">getVotingResults</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#moveToNextFeature">moveToNextFeature</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#submitVote">submitVote</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#validateVotes">validateVotes</a></li></ul></li><li><a href="module-models_Session-Session.html">Session</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#addPlayer">addPlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getCurrentFeature">getCurrentFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#isCompleted">isCompleted</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#loadBacklog">loadBacklog</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#nextFeature">nextFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#removePlayer">removePlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#start">start</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#toJSON">toJSON</a></li></ul></li><li></li></ul><h3>Modules</h3><ul><li><a href="module-models_Session.html">models/Session</a></li><li><a href="module-utils_calculator.html">utils/calculator</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~allVotesCoffee">allVotesCoffee</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~calculateAverage">calculateAverage</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~checkUnanimity">checkUnanimity</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~getUnanimousValue">getUnanimousValue</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~validateEstimation">validateEstimation</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#VALID_CARD_VALUES">VALID_CARD_VALUES</a></li><li><a href="global.html#VALID_GAME_MODES">VALID_GAME_MODES</a></li><li><a href="global.html#isValidCardValue">isValidCardValue</a></li><li><a href="global.html#isValidGameMode">isValidGameMode</a></li><li><a href="global.html#isValidSessionCode">isValidSessionCode</a></li><li><a href="global.html#validateBacklog">validateBacklog</a></li><li><a href="global.html#validateFeature">validateFeature</a></li><li><a href="global.html#validatePseudo">validatePseudo</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">managers/SessionManager.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Session = require('../models/Session');
+const Player = require('../models/Player');
+const { v4: uuidv4 } = require('uuid');
+const { isValidGameMode, validatePseudo, isValidSessionCode } = require('../utils/validators');
+
+/**
+ * Gestionnaire de sessions
+ * Pattern Singleton pour avoir une seule instance
+ */
+class SessionManager {
+  constructor() {
+    this.sessions = new Map();
+  }
+
+  /**
+   * Crée une nouvelle session
+   * @param {string} organizerPseudo - Pseudo de l'organisateur
+   * @param {string} mode - Mode de jeu ('strict' ou 'average')
+   * @returns {Object} { success: boolean, session: Session|null, error: string|null }
+   */
+  createSession(organizerPseudo, mode = 'strict') {
+    const pseudoValidation = validatePseudo(organizerPseudo);
+    if (!pseudoValidation.valid) {
+      return { success: false, session: null, error: pseudoValidation.error };
+    }
+
+    if (!isValidGameMode(mode)) {
+      return { success: false, session: null, error: 'Invalid game mode' };
+    }
+
+    const organizerId = uuidv4();
+    const session = new Session(organizerId, mode);
+    
+    const organizer = new Player(organizerId, organizerPseudo, null, true);
+    session.addPlayer(organizer);
+
+    this.sessions.set(session.id, session);
+
+    console.log(`Session created: ${session.code} (${session.id})`);
+
+    return { 
+      success: true, 
+      session: session,
+      error: null 
+    };
+  }
+
+  /**
+   * Permet à un joueur de rejoindre une session existante
+   * @param {string} sessionCode - Code de la session
+   * @param {string} pseudo - Pseudo du joueur
+   * @param {string} socketId - Socket ID du joueur
+   * @returns {Object} { success: boolean, session: Session|null, player: Player|null, error: string|null }
+   */
+  joinSession(sessionCode, pseudo, socketId) {
+    if (!isValidSessionCode(sessionCode)) {
+      return { success: false, session: null, player: null, error: 'Invalid session code format' };
+    }
+
+    const pseudoValidation = validatePseudo(pseudo);
+    if (!pseudoValidation.valid) {
+      return { success: false, session: null, player: null, error: pseudoValidation.error };
+    }
+
+    const session = this.getSessionByCode(sessionCode);
+    if (!session) {
+      return { success: false, session: null, player: null, error: 'Session not found' };
+    }
+
+    if (session.status !== 'waiting' &amp;&amp; session.status !== 'playing') {
+      return { success: false, session: null, player: null, error: 'Session is closed' };
+    }
+
+    const existingPlayer = session.players.find(p => p.pseudo === pseudo);
+    if (existingPlayer) {
+      return { success: false, session: null, player: null, error: 'Pseudo already taken' };
+    }
+
+    const playerId = uuidv4();
+    const player = new Player(playerId, pseudo, socketId, false);
+    session.addPlayer(player);
+
+    console.log(`Player ${pseudo} joined session ${session.code}`);
+
+    return {
+      success: true,
+      session: session,
+      player: player,
+      error: null
+    };
+  }
+
+  /**
+   * Récupère une session par son ID
+   * @param {string} sessionId - ID de la session
+   * @returns {Session|null}
+   */
+  getSession(sessionId) {
+    return this.sessions.get(sessionId) || null;
+  }
+
+  /**
+   * Récupère une session par son code
+   * @param {string} code - Code de la session
+   * @returns {Session|null}
+   */
+  getSessionByCode(code) {
+    for (let session of this.sessions.values()) {
+      if (session.code === code) {
+        return session;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Retire un joueur d'une session
+   * @param {string} sessionId - ID de la session
+   * @param {string} playerId - ID du joueur
+   * @returns {boolean}
+   */
+  removePlayerFromSession(sessionId, playerId) {
+    const session = this.getSession(sessionId);
+    if (!session) {
+      return false;
+    }
+
+    const player = session.getPlayer(playerId);
+    if (!player) {
+      return false;
+    }
+
+    session.removePlayer(playerId);
+
+    console.log(`Player ${player.pseudo} left session ${session.code}`);
+
+    if (session.players.length === 0) {
+      this.deleteSession(sessionId);
+    }
+
+    return true;
+  }
+
+  /**
+   * Supprime une session
+   * @param {string} sessionId - ID de la session
+   * @returns {boolean}
+   */
+  deleteSession(sessionId) {
+    const session = this.getSession(sessionId);
+    if (!session) {
+      return false;
+    }
+
+    this.sessions.delete(sessionId);
+    console.log(`Session ${session.code} deleted`);
+    return true;
+  }
+
+  /**
+   * Récupère toutes les sessions actives
+   * @returns {Array}
+   */
+  getAllSessions() {
+    return Array.from(this.sessions.values());
+  }
+}
+
+const sessionManager = new SessionManager();
+
+module.exports = sessionManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

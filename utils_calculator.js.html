@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>utils/calculator.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/MarteOued/planning-poker" target="_blank" >Documentation</a></h2><h3>Classes</h3><ul><li><a href="BacklogManager.html">BacklogManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="BacklogManager.html#addFeature">addFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#cloneBacklog">cloneBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getAllFeatures">getAllFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getCompletedFeatures">getCompletedFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#getRemainingFeatures">getRemainingFeatures</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#parseBacklog">parseBacklog</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#removeFeature">removeFeature</a></li><li data-type='method' style='display: none;'><a href="BacklogManager.html#reorderFeatures">reorderFeatures</a></li></ul></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Feature.html#addVote">addVote</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersCoffee">allPlayersCoffee</a></li><li data-type='method' style='display: none;'><a href="Feature.html#allPlayersVoted">allPlayersVoted</a></li><li data-type='method' style='display: none;'><a href="Feature.html#clearVotes">clearVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#getCurrentRoundVotes">getCurrentRoundVotes</a></li><li data-type='method' style='display: none;'><a href="Feature.html#setEstimate">setEstimate</a></li><li data-type='method' style='display: none;'><a href="Feature.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="Feature.html#toJSON">toJSON</a></li></ul></li><li><a href="FileManager.html">FileManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileManager.html#cleanOldSessions">cleanOldSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#createDownloadableJSON">createDownloadableJSON</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#ensureDirectories">ensureDirectories</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#exportResults">exportResults</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#listSavedSessions">listSavedSessions</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#loadSession">loadSession</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#parseBacklogFile">parseBacklogFile</a></li><li data-type='method' style='display: none;'><a href="FileManager.html#saveSession">saveSession</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Player.html#resetVote">resetVote</a></li><li data-type='method' style='display: none;'><a href="Player.html#toJSON">toJSON</a></li><li data-type='method' style='display: none;'><a href="Player.html#vote">vote</a></li></ul></li><li><a href="SessionManager.html">SessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SessionManager.html#createSession">createSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#deleteSession">deleteSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getAllSessions">getAllSessions</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSession">getSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#getSessionByCode">getSessionByCode</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#joinSession">joinSession</a></li><li data-type='method' style='display: none;'><a href="SessionManager.html#removePlayerFromSession">removePlayerFromSession</a></li></ul></li><li><a href="Vote.html">Vote</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Vote.html#getNumericValue">getNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isCoffeeCard">isCoffeeCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isNumericValue">isNumericValue</a></li><li data-type='method' style='display: none;'><a href="Vote.html#isUnknownCard">isUnknownCard</a></li><li data-type='method' style='display: none;'><a href="Vote.html#toJSON">toJSON</a></li></ul></li><li><a href="VotingManager.html">VotingManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="VotingManager.html#checkAllVoted">checkAllVoted</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#getVotingResults">getVotingResults</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#moveToNextFeature">moveToNextFeature</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#startNewRound">startNewRound</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#submitVote">submitVote</a></li><li data-type='method' style='display: none;'><a href="VotingManager.html#validateVotes">validateVotes</a></li></ul></li><li><a href="module-models_Session-Session.html">Session</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#addPlayer">addPlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getCurrentFeature">getCurrentFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#getProgress">getProgress</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#isCompleted">isCompleted</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#loadBacklog">loadBacklog</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#nextFeature">nextFeature</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#removePlayer">removePlayer</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#reset">reset</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#start">start</a></li><li data-type='method' style='display: none;'><a href="module-models_Session-Session.html#toJSON">toJSON</a></li></ul></li><li></li></ul><h3>Modules</h3><ul><li><a href="module-models_Session.html">models/Session</a></li><li><a href="module-utils_calculator.html">utils/calculator</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~allVotesCoffee">allVotesCoffee</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~calculateAverage">calculateAverage</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~checkUnanimity">checkUnanimity</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~getUnanimousValue">getUnanimousValue</a></li><li data-type='method' style='display: none;'><a href="module-utils_calculator.html#~validateEstimation">validateEstimation</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#VALID_CARD_VALUES">VALID_CARD_VALUES</a></li><li><a href="global.html#VALID_GAME_MODES">VALID_GAME_MODES</a></li><li><a href="global.html#isValidCardValue">isValidCardValue</a></li><li><a href="global.html#isValidGameMode">isValidGameMode</a></li><li><a href="global.html#isValidSessionCode">isValidSessionCode</a></li><li><a href="global.html#validateBacklog">validateBacklog</a></li><li><a href="global.html#validateFeature">validateFeature</a></li><li><a href="global.html#validatePseudo">validatePseudo</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">utils/calculator.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module utils/calculator
+ * @description Utilitaires de calcul pour le Planning Poker.
+ * Ce module contient les fonctions pour valider les votes selon différents modes de jeu.
+ */
+
+/**
+ * Vérifie si tous les votes sont identiques (unanimité)
+ * @function checkUnanimity
+ * @param {Array&lt;Vote>} votes - Tableau de votes
+ * @returns {boolean} true si tous les votes numériques sont identiques
+ * @example
+ * const votes = [new Vote('p1', 5, 1), new Vote('p2', 5, 1)];
+ * checkUnanimity(votes); // returns true
+ */
+function checkUnanimity(votes) {
+  if (votes.length === 0) {
+    return false;
+  }
+
+  const numericVotes = votes.filter(vote => {
+    return vote.value !== 'coffee' &amp;&amp; vote.value !== '?';
+  });
+
+  if (numericVotes.length === 0) {
+    return false;
+  }
+
+  const firstValue = numericVotes[0].value;
+  return numericVotes.every(vote => vote.value === firstValue);
+}
+
+/**
+ * Calcule la moyenne des votes numériques
+ * @function calculateAverage
+ * @param {Array&lt;Vote>} votes - Tableau de votes
+ * @returns {number|null} Moyenne arrondie ou null si aucun vote valide
+ * @example
+ * const votes = [new Vote('p1', 5, 1), new Vote('p2', 8, 1)];
+ * calculateAverage(votes); // returns 7 (arrondi de 6.5)
+ */
+function calculateAverage(votes) {
+  const numericVotes = votes.filter(vote => {
+    const value = vote.value;
+    return value !== 'coffee' &amp;&amp; value !== '?' &amp;&amp; !isNaN(Number(value));
+  });
+
+  if (numericVotes.length === 0) {
+    return null;
+  }
+
+  const sum = numericVotes.reduce((acc, vote) => {
+    return acc + Number(vote.value);
+  }, 0);
+
+  const average = sum / numericVotes.length;
+  
+  return Math.round(average);
+}
+
+/**
+ * Trouve la valeur commune en cas d'unanimité
+ * @function getUnanimousValue
+ * @param {Array&lt;Vote>} votes - Tableau de votes
+ * @returns {number|string|null} La valeur unanime ou null
+ */
+function getUnanimousValue(votes) {
+  if (!checkUnanimity(votes)) {
+    return null;
+  }
+
+  const numericVotes = votes.filter(vote => {
+    return vote.value !== 'coffee' &amp;&amp; vote.value !== '?';
+  });
+
+  return numericVotes.length > 0 ? numericVotes[0].value : null;
+}
+
+/**
+ * Valide une estimation selon le mode de jeu
+ * @function validateEstimation
+ * @param {Array&lt;Vote>} votes - Tableau de votes du tour actuel
+ * @param {string} mode - Mode de jeu ('strict' ou 'average')
+ * @param {number} round - Numéro du tour (1, 2, 3...)
+ * @returns {Object} Résultat de la validation
+ * @returns {boolean} returns.validated - Si l'estimation est validée
+ * @returns {number|null} returns.estimate - La valeur estimée
+ * @returns {string} returns.method - Méthode de validation utilisée
+ * @example
+ * // Mode strict avec unanimité
+ * const votes = [new Vote('p1', 5, 1), new Vote('p2', 5, 1)];
+ * validateEstimation(votes, 'strict', 1);
+ * // returns { validated: true, estimate: 5, method: 'unanimous' }
+ * 
+ * @example
+ * // Mode moyenne au tour 2
+ * const votes = [new Vote('p1', 5, 2), new Vote('p2', 8, 2)];
+ * validateEstimation(votes, 'average', 2);
+ * // returns { validated: true, estimate: 7, method: 'average' }
+ */
+function validateEstimation(votes, mode, round) {
+  if (votes.length === 0) {
+    return { validated: false, estimate: null, method: 'none' };
+  }
+
+  if (mode === 'strict') {
+    if (checkUnanimity(votes)) {
+      return {
+        validated: true,
+        estimate: getUnanimousValue(votes),
+        method: 'unanimous'
+      };
+    }
+    return { validated: false, estimate: null, method: 'strict' };
+  }
+
+  if (mode === 'average') {
+    if (round === 1) {
+      if (checkUnanimity(votes)) {
+        return {
+          validated: true,
+          estimate: getUnanimousValue(votes),
+          method: 'unanimous'
+        };
+      }
+      return { validated: false, estimate: null, method: 'first_round_unanimity' };
+    } else {
+      const average = calculateAverage(votes);
+      if (average !== null) {
+        return {
+          validated: true,
+          estimate: average,
+          method: 'average'
+        };
+      }
+      return { validated: false, estimate: null, method: 'no_numeric_votes' };
+    }
+  }
+
+  return { validated: false, estimate: null, method: 'unknown_mode' };
+}
+
+/**
+ * Vérifie si tous les votes sont des cartes café
+ * @function allVotesCoffee
+ * @param {Array&lt;Vote>} votes - Tableau de votes
+ * @param {number} totalPlayers - Nombre total de joueurs
+ * @returns {boolean} true si tous les joueurs ont voté café
+ */
+function allVotesCoffee(votes, totalPlayers) {
+  if (votes.length !== totalPlayers) {
+    return false;
+  }
+  return votes.every(vote => vote.value === 'coffee');
+}
+
+module.exports = {
+  checkUnanimity,
+  calculateAverage,
+  getUnanimousValue,
+  validateEstimation,
+  allVotesCoffee
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
