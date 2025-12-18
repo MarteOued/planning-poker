@@ -9,13 +9,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    outDir: 'build',
+  },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json-summary', 'json', 'html', 'lcov'],
+      reporter: ['text', 'json-summary', 'json', 'html'],
       reportsDirectory: './coverage',
       include: ['src/**/*.{js,jsx}'],
       exclude: [
@@ -23,7 +26,6 @@ export default defineConfig({
         'src/test/',
         '**/*.test.{js,jsx}',
       ],
-      all: true,
     },
   },
 });
