@@ -42,16 +42,16 @@ export default function WaitingRoom() {
     }
 
     socket.on('join-success', (data) => {
-      console.log('✅ Rejoint la session:', data)
-      console.log('📊 PlayerCount:', data.session?.playerCount)
+      console.log('Rejoint la session:', data)
+      console.log('PlayerCount:', data.session?.playerCount)
       setSessionInfo(data.session)
       setPmName(data.session.pm.name)
       setPlayersState(data.session.players)
     })
 
     socket.on('session-updated', (data) => {
-      console.log('🔄 Session mise à jour:', data)
-      console.log('📊 PlayerCount:', data.session?.playerCount)
+      console.log('Session mise à jour:', data)
+      console.log('PlayerCount:', data.session?.playerCount)
       setSessionInfo(data.session)
       setPlayersState(data.session.players)
       setPmName(data.session.pm.name)
@@ -59,16 +59,16 @@ export default function WaitingRoom() {
     })
 
     socket.on('player-joined', (data) => {
-      showToast(`✨ ${data.player} a rejoint la session (${data.totalPlayers})`)
+      showToast(`${data.player} a rejoint la session (${data.totalPlayers})`)
     })
 
     socket.on('player-left', (data) => {
-      showToast(`👋 ${data.player} a quitté la session (${data.totalPlayers})`, 'warning')
+      showToast(`${data.player} a quitté la session (${data.totalPlayers})`, 'warning')
     })
 
     socket.on('session-started', (data) => {
       console.log(' Session démarrée!')
-      showToast('🎮 La session démarre !', 'success')
+      showToast('La session démarre !', 'success')
       setTimeout(() => {
         navigate(`/game/${sessionId}`)
       }, 1500)
@@ -79,7 +79,7 @@ export default function WaitingRoom() {
     })
 
     socket.on('error', (data) => {
-      showToast(`❌ ${data.message}`, 'error')
+      showToast(`${data.message}`, 'error')
     })
 
     return () => {
@@ -175,7 +175,7 @@ export default function WaitingRoom() {
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            ⏳ En attente du démarrage de la session...
+             En attente du démarrage de la session...
           </motion.p>
         </motion.div>
 
@@ -210,7 +210,7 @@ export default function WaitingRoom() {
           {/* Players list */}
           <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
             <h3 className="text-xl font-bold text-gray-800 mb-4">
-              👥 Joueurs Connectés {totalPlayers}
+               Joueurs Connectés {totalPlayers}
             </h3>
             <div className="space-y-3">
               {/* PM */}
@@ -263,7 +263,7 @@ export default function WaitingRoom() {
             {totalPlayers < maxPlayers && (
               <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-center">
                 <p className="text-sm text-blue-700 font-medium">
-                  📊 En attente de {maxPlayers - totalPlayers} joueurs supplémentaires...
+                   En attente de {maxPlayers - totalPlayers} joueurs supplémentaires...
                 </p>
               </div>
             )}
@@ -275,21 +275,21 @@ export default function WaitingRoom() {
           <h3 className="text-xl font-bold text-gray-800 mb-4">💡 Prochaines Étapes</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-3 bg-blue-50 rounded-lg">
-              <span className="text-2xl">1️⃣</span>
+              <span className="text-2xl">1️</span>
               <div>
                 <p className="text-gray-800 font-medium">Le PM va charger le backlog</p>
                 <p className="text-sm text-gray-600">Liste des fonctionnalités à estimer</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-3 bg-purple-50 rounded-lg">
-              <span className="text-2xl">2️⃣</span>
+              <span className="text-2xl">2️</span>
               <div>
                 <p className="text-gray-800 font-medium">Tous les joueurs recevront la notification</p>
                 <p className="text-sm text-gray-600">Vous serez alerté automatiquement</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-3 bg-blue-50 rounded-lg">
-              <span className="text-2xl">3️⃣</span>
+              <span className="text-2xl">3️</span>
               <div>
                 <p className="text-gray-800 font-medium">Le jeu démarrera automatiquement</p>
                 <p className="text-sm text-gray-600">Préparez-vous à voter !</p>
@@ -297,14 +297,14 @@ export default function WaitingRoom() {
             </div>
           </div>
           <div className="mt-6 p-4 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl text-center border border-blue-200">
-            <p className="text-sm text-blue-700 font-medium">⏱️ Temps d'attente moyen: 2-3 minutes</p>
+            <p className="text-sm text-blue-700 font-medium">Temps d'attente moyen: 2-3 minutes</p>
           </div>
         </div>
 
         {/* Share code */}
         <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100 mb-6">
           <div className="text-center">
-            <p className="text-gray-600 mb-4 font-medium">🔗 Partagez ce code avec vos collègues:</p>
+            <p className="text-gray-600 mb-4 font-medium">Partagez ce code avec vos collègues:</p>
             <div className="flex items-center justify-center gap-4">
               <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-widest">
                 {sessionId}

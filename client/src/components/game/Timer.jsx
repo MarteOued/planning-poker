@@ -15,14 +15,14 @@ export default function Timer({ isPM, sessionId, onTimeUp }) {
 
     // Écouter les mises à jour du timer
     socket.on('timer-updated', (data) => {
-      console.log('⏱️ Timer mis à jour:', data)
+      console.log('Timer mis à jour:', data)
       setTime(data.time)
       setIsRunning(data.isRunning)
     })
 
     // Écouter le reset du timer
     socket.on('timer-reset', (data) => {
-      console.log('🔄 Timer réinitialisé')
+      console.log('Timer réinitialisé')
       setTime(0)
       setIsRunning(false)
     })
@@ -207,7 +207,7 @@ export default function Timer({ isPM, sessionId, onTimeUp }) {
             <div className="mt-2 text-sm text-gray-600">
               Objectif: {formatTime(totalTargetSeconds)}
               {progress >= 100 && (
-                <span className="ml-2 text-red-500 font-bold">⏰ Temps écoulé!</span>
+                <span className="ml-2 text-red-500 font-bold">Temps écoulé!</span>
               )}
             </div>
           )}
@@ -257,7 +257,7 @@ export default function Timer({ isPM, sessionId, onTimeUp }) {
       ) : (
         <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
           <p className="text-sm text-blue-700">
-            🔒 Seul le PM peut contrôler le chronomètre
+              Seul le PM peut contrôler le chronomètre
           </p>
         </div>
       )}
