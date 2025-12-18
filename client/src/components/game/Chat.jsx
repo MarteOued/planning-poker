@@ -91,7 +91,7 @@ export default function Chat({ sessionId, userName, isOpen, onToggle }) {
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center text-gray-400">
             <p className="text-center">
-              💬 Aucun message<br />
+               Aucun message<br />
               <span className="text-sm">Commencez la discussion !</span>
             </p>
           </div>

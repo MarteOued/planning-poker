@@ -11,11 +11,11 @@ export const initSocket = () => {
     })
     
     socket.on('connect', () => {
-      console.log('✅ Connecté au serveur Socket.io:', socket.id)
+      console.log(' Connecté au serveur Socket.io:', socket.id)
     })
     
     socket.on('disconnect', () => {
-      console.log('❌ Déconnecté du serveur')
+      console.log(' Déconnecté du serveur')
     })
   }
   

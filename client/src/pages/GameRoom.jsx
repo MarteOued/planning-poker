@@ -47,7 +47,7 @@ export default function GameRoom() {
     })
 
     socket.on('all-voted', (data) => {
-      console.log('✅ Tous ont voté!', data)
+      console.log('Tous ont voté!', data)
       setAllVotes(data.votes)
       setPlayers(data.players)
       setPmData(data.pm)
@@ -56,17 +56,17 @@ export default function GameRoom() {
       
       // Afficher un toast différent selon l'état
       if (data.result?.isSessionFinished) {
-        showToast('🏁 Toutes les features ont été estimées ! Le PM peut télécharger les résultats.', 'info')
+        showToast(' Toutes les features ont été estimées ! Le PM peut télécharger les résultats.', 'info')
       } else {
-        showToast('🎉 Tous les joueurs ont voté !', 'success')
+        showToast('Tous les joueurs ont voté !', 'success')
       }
     })
     
     socket.on('coffee-break', (data) => {
-      console.log('☕ Pause café!', data)
+      console.log(' Pause café!', data)
       setIsOnBreak(true)
       setBreakData(data.saveData)
-      showToast('☕ Pause café ! Session sauvegardée.', 'success')
+      showToast(' Pause café ! Session sauvegardée.', 'success')
       
       const blob = new Blob([JSON.stringify(data.saveData, null, 2)], { type: 'application/json' })
       const url = URL.createObjectURL(blob)
@@ -78,30 +78,30 @@ export default function GameRoom() {
     })
     
     socket.on('new-round-started', (data) => {
-      console.log('🔄 Nouveau tour:', data)
+      console.log(' Nouveau tour:', data)
       resetVoting()
       showToast(data.message, 'info')
     })
     
     socket.on('session-resumed', (data) => {
-      console.log('▶️ Session reprise:', data)
+      console.log(' Session reprise:', data)
       setIsOnBreak(false)
       resetVoting()
       showToast(data.message, 'success')
     })
 
     socket.on('next-feature', (data) => {
-      console.log('➡️ Feature suivante:', data)
-      console.log('📊 Index reçu:', data.currentFeatureIndex, '/ Total:', features?.length)
+      console.log(' Feature suivante:', data)
+      console.log('Index reçu:', data.currentFeatureIndex, '/ Total:', features?.length)
       setCurrentFeature(data.currentFeature)
       setCurrentFeatureIndex(data.currentFeatureIndex)
       storeNextFeature()
       resetVoting()
-      showToast(`➡️ Feature ${data.currentFeatureIndex + 1}: ${data.currentFeature.name || data.currentFeature.title}`, 'info')
+      showToast(` Feature ${data.currentFeatureIndex + 1}: ${data.currentFeature.name || data.currentFeature.title}`, 'info')
     })
 
     socket.on('error', (data) => {
-      showToast(`❌ ${data.message}`, 'error')
+      showToast(` ${data.message}`, 'error')
     })
 
     if (features && features.length > 0) {
@@ -147,7 +147,7 @@ export default function GameRoom() {
       vote: selectedCard
     })
     setHasVoted(true)
-    showToast('✓ Vote enregistré !', 'success')
+    showToast(' Vote enregistré !', 'success')
   }
 
   const handleNextFeature = () => {
@@ -166,7 +166,7 @@ export default function GameRoom() {
   }
   
   const handleEndSession = () => {
-    showToast('📥 Téléchargement des résultats...', 'success')
+    showToast(' Téléchargement des résultats...', 'success')
     
     // Préparer les données de résultats
     const resultsData = {
@@ -372,7 +372,7 @@ export default function GameRoom() {
                       
                       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-4 mb-6 max-w-md mx-auto">
                         <p className="text-blue-600 text-sm mb-2">
-                          📥 Fichier de sauvegarde téléchargé
+                           Fichier de sauvegarde téléchargé
                         </p>
                         <p className="text-gray-800 font-mono text-xs">
                           planning-poker-save-{sessionId}.json
@@ -387,7 +387,7 @@ export default function GameRoom() {
                             fullWidth
                             onClick={handleResumeFromBreak}
                           >
-                            ▶️ Reprendre la Session
+                             Reprendre la Session
                           </Button>
                           <p className="text-sm text-gray-500">
                              Vous pouvez aussi quitter et reprendre plus tard avec le fichier de sauvegarde
@@ -399,7 +399,7 @@ export default function GameRoom() {
                           animate={{ opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          ⏳ En attente que le PM reprenne la session...
+                           En attente que le PM reprenne la session...
                         </motion.p>
                       )}
                     </div>
@@ -414,7 +414,7 @@ export default function GameRoom() {
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
                     <h3 className="text-xl font-bold text-gray-800 mb-4">
-                      {hasVoted ? '✅ Vote enregistré' : '🃏 Sélectionnez votre carte'}
+                      {hasVoted ? 'Vote enregistré' : 'Sélectionnez votre carte'}
                     </h3>
                     
                     {/* Cards grid */}
@@ -455,7 +455,7 @@ export default function GameRoom() {
                         className="text-center space-y-2"
                       >
                         <div className="flex items-center justify-center gap-2 text-emerald-600 font-semibold">
-                          <span>✅</span>
+                          <span> </span>
                           <span>Vote enregistré avec succès !</span>
                         </div>
                         <motion.p
@@ -463,7 +463,7 @@ export default function GameRoom() {
                           animate={{ opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          ⏳ En attente des autres joueurs... ({votedCount}/{totalPlayers} ont voté)
+                          En attente des autres joueurs... ({votedCount}/{totalPlayers} ont voté)
                         </motion.p>
                       </motion.div>
                     )}
@@ -478,14 +478,14 @@ export default function GameRoom() {
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-card border border-blue-100">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-                      📊 Résultats du Vote
+                       Résultats du Vote
                     </h3>
                     
                     <div className="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-4 mb-6">
                       <p className="text-emerald-600 text-center font-semibold">
                         {result?.isSessionFinished 
-                          ? '🏁 Toutes les features ont été estimées !' 
-                          : '🎉 Tous les joueurs ont voté !'
+                          ? 'Toutes les features ont été estimées !' 
+                          : 'Tous les joueurs ont voté !'
                         }
                       </p>
                     </div>
@@ -574,7 +574,7 @@ export default function GameRoom() {
                       result.isSessionFinished ? (
                         <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl p-4 mb-6">
                           <h3 className="text-2xl font-bold text-green-700 text-center mb-2">
-                            🎉 Session Terminée !
+                             Session Terminée !
                           </h3>
                           <p className="text-green-600 text-center mb-4">
                             Toutes les {totalFeatures} features ont été estimées avec succès.
@@ -602,7 +602,7 @@ export default function GameRoom() {
                       ) : (
                         <div className="bg-emerald-50 border-2 border-emerald-400 rounded-xl p-4 mb-6">
                           <p className="text-emerald-700 text-center font-bold text-xl">
-                            ✅ ESTIMATION VALIDÉE: {result.estimation} points
+                             ESTIMATION VALIDÉE: {result.estimation} points
                           </p>
                           <p className="text-emerald-600 text-center text-sm mt-1">
                             {result.message}
@@ -618,20 +618,20 @@ export default function GameRoom() {
                           // Fin de session
                           <div>
                             <Button variant="success" size="lg" fullWidth onClick={handleEndSession}>
-                              📥 Télécharger les Résultats et Terminer
+                               Télécharger les Résultats et Terminer
                             </Button>
                           </div>
                         ) : result && result.needsNewRound ? (
                           <Button variant="primary" size="lg" fullWidth onClick={handleNewRound}>
-                            🔄 Nouveau Tour de Vote
+                             Nouveau Tour de Vote
                           </Button>
                         ) : (
                           <>
                             <Button variant="primary" size="lg" fullWidth onClick={handleNextFeature}>
-                              ➡️ Feature Suivante
+                               Feature Suivante
                             </Button>
                             <Button variant="secondary" size="lg" fullWidth onClick={handleNewRound}>
-                              🔄 Refaire un Tour
+                               Refaire un Tour
                             </Button>
                           </>
                         )}
@@ -644,7 +644,7 @@ export default function GameRoom() {
                             className="mt-2"
                             onClick={handleEndSessionManually}
                           >
-                            🏁 Terminer la Session Maintenant
+                              Terminer la Session Maintenant
                           </Button>
                         )}
                       </div>
@@ -655,8 +655,8 @@ export default function GameRoom() {
                         transition={{ duration: 2, repeat: Infinity }}
                       >
                         {result && result.isSessionFinished 
-                          ? '🎉 Session terminée ! En attente que le PM télécharge les résultats...'
-                          : '⏳ En attente de la décision du PM...'
+                          ? 'Session terminée ! En attente que le PM télécharge les résultats...'
+                          : 'En attente de la décision du PM...'
                         }
                       </motion.p>
                     )}
@@ -749,7 +749,7 @@ export default function GameRoom() {
             <Timer 
               isPM={isPM}
               sessionId={sessionId}
-              onTimeUp={() => showToast('⏰ Temps écoulé !', 'warning')} 
+              onTimeUp={() => showToast('Temps écoulé !', 'warning')} 
             />
           </div>
         </div>

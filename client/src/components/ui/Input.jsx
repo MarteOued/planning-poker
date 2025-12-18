@@ -48,7 +48,7 @@ export default function Input({
       
       {error && (
         <p className="text-sm text-red-500 flex items-center gap-1">
-          <span>⚠️</span> {error}
+          <span> </span> {error}
         </p>
       )}
       

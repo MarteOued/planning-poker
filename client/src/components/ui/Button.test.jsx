@@ -102,7 +102,7 @@ describe('Button Component', () => {
     expect(button).toHaveClass('text-blue-600')
   })
 
-  // Test 7: Tailles - CORRIGÉ
+  // Test 7: Tailles 
   it('should have small size classes', () => {
     const { container } = render(<Button size="sm">Small</Button>)
     const button = container.firstChild

@@ -23,7 +23,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            🎯 Planning Poker
+             Planning Poker
           </motion.h1>
           <motion.p 
             className="text-xl text-gray-600"
