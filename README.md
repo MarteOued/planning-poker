@@ -202,7 +202,7 @@ La documentation sera disponible dans `server/docs/index.html`
 
 ---
 
-## Intégration Continue
+## Intégration Continue :
 
 Le projet utilise GitHub Actions pour automatiser :
 
@@ -215,7 +215,7 @@ Configuration disponible dans `.github/workflows/ci-cd.yml`
 
 ---
 
-## Structure du projet
+## Structure du projet :
 
 ```
 planning-poker/
