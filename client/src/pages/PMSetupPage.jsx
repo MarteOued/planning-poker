@@ -285,7 +285,7 @@ export default function PMSetupPage() {
                 disabled={loading}
                 onClick={handleSubmit}
               >
-                {loading ? '⏳ Création en cours...' : 'Créer la Session'}
+                {loading ? ' Création en cours...' : 'Créer la Session'}
               </Button>
             </div>
           </div>

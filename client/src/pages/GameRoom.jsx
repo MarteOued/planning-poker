@@ -97,11 +97,11 @@ export default function GameRoom() {
       setCurrentFeatureIndex(data.currentFeatureIndex)
       storeNextFeature()
       resetVoting()
-      showToast(`➡️ Feature ${data.currentFeatureIndex + 1}: ${data.currentFeature.name || data.currentFeature.title}`, 'info')
+      showToast(`Feature ${data.currentFeatureIndex + 1}: ${data.currentFeature.name || data.currentFeature.title}`, 'info')
     })
 
     socket.on('error', (data) => {
-      showToast(`❌ ${data.message}`, 'error')
+      showToast(` ${data.message}`, 'error')
     })
 
     if (features && features.length > 0) {
@@ -166,7 +166,7 @@ export default function GameRoom() {
   }
   
   const handleEndSession = () => {
-    showToast('📥 Téléchargement des résultats...', 'success')
+    showToast('Téléchargement des résultats...', 'success')
     
     // Préparer les données de résultats
     const resultsData = {
@@ -318,7 +318,7 @@ export default function GameRoom() {
                 </div>
                 
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                  📋 {feature.name || feature.title}
+                   {feature.name || feature.title}
                 </h2>
                 
                 <p className="text-gray-600 mb-4 leading-relaxed">
@@ -399,7 +399,7 @@ export default function GameRoom() {
                           animate={{ opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          ⏳ En attente que le PM reprenne la session...
+                          En attente que le PM reprenne la session...
                         </motion.p>
                       )}
                     </div>
@@ -463,7 +463,7 @@ export default function GameRoom() {
                           animate={{ opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          ⏳ En attente des autres joueurs... ({votedCount}/{totalPlayers} ont voté)
+                          En attente des autres joueurs... ({votedCount}/{totalPlayers} ont voté)
                         </motion.p>
                       </motion.div>
                     )}
@@ -581,7 +581,7 @@ export default function GameRoom() {
                           </p>
                           <div className="bg-white rounded-lg p-4">
                             <p className="text-sm text-gray-700 mb-2">
-                              📊 <strong>Résumé :</strong>
+                              <strong>Résumé :</strong>
                             </p>
                             <ul className="text-sm text-gray-600 space-y-1">
                               <li>• Mode : <strong className="text-gray-800 capitalize">{mode}</strong></li>
@@ -618,7 +618,7 @@ export default function GameRoom() {
                           // Fin de session
                           <div>
                             <Button variant="success" size="lg" fullWidth onClick={handleEndSession}>
-                              📥 Télécharger les Résultats et Terminer
+                              Télécharger les Résultats et Terminer
                             </Button>
                           </div>
                         ) : result && result.needsNewRound ? (
@@ -656,7 +656,7 @@ export default function GameRoom() {
                       >
                         {result && result.isSessionFinished 
                           ? '🎉 Session terminée ! En attente que le PM télécharge les résultats...'
-                          : '⏳ En attente de la décision du PM...'
+                          : ' En attente de la décision du PM...'
                         }
                       </motion.p>
                     )}
@@ -749,7 +749,7 @@ export default function GameRoom() {
             <Timer 
               isPM={isPM}
               sessionId={sessionId}
-              onTimeUp={() => showToast('⏰ Temps écoulé !', 'warning')} 
+              onTimeUp={() => showToast(' Temps écoulé !', 'warning')} 
             />
           </div>
         </div>

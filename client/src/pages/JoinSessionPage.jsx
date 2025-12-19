@@ -167,7 +167,7 @@ export default function JoinSessionPage() {
                 disabled={loading || !pseudo || sessionCode.length !== 6}
                 onClick={handleSubmit}
               >
-                {loading ? ' Connexion...' : '🚀 Rejoindre la Session'}
+                {loading ? ' Connexion...' : 'Rejoindre la Session'}
               </Button>
             </div>
           </div>
